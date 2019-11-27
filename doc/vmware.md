@@ -206,7 +206,7 @@ On vSphere GUI,
 
 ## Creating the cluster
 
-On Bastion VM,
+The following tasks must have done from Bastion VM.
 
 ### Monitor the bootsrap process
 
@@ -242,4 +242,20 @@ oc get csr
 
 ```
 oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
+```
+
+### Image registry storage configuration
+
+- modify the storage specification of `configs.imageregistry.operator.openshift.io/cluster`
+
+```shell
+oc edit configs.imageregistry.operator.openshift.io/cluster
+```
+
+Leave the `claim` filed blank to allow the automatic creation of an `image-registry-storage` PVC.
+
+- check the clusteroperator status
+
+```shell
+oc get clusteroperator image-registry
 ```
