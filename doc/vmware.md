@@ -85,7 +85,7 @@ ssh-keygen -f ~/.ssh/cluster-ocp-key -N ''
 mkdir ocp-vsphere
 ```
 
-- create `install-config.yaml` file
+- create `install-config.yaml` file in the working installer directory
 
 ```yaml
 apiVersion: v1
