@@ -1,0 +1,18 @@
+{
+  "ignition": {
+    "config": {
+      "append": [
+        {
+          "source": "http://{{ ansible_default_ipv4.address }}/{{ http_server_ignition_files_dir_name }}/bootstrap.ign",
+          "verification": {}
+        }
+      ]
+    },
+    "timeouts": {},
+    "version": "2.1.0"
+  },
+  "networkd": {},
+  "passwd": {},
+  "storage": {},
+  "systemd": {}
+}

@@ -7,6 +7,13 @@ tools_packages:
 
 ssh_key_name: "cluster-ocp-key"
 
+# HTTP server
+
+http_server_package_name: "nginx"
+http_server_service_name: "nginx"
+http_server_data_dir: "/usr/share/nginx/html"
+http_server_ignition_files_dir_name: "ignition"
+
 # general OpenShift vars
 
 openshift_version: "4.2.7"
@@ -43,11 +50,8 @@ vcenter_default_datastore: "your_datastore"
 
 # OpenShift ignition config files vars
 
-openshift_append_bootstrap_ign_name: "append-bootstrap"
-
-# HTTP server
-
-http_server_package_name: "nginx"
-http_server_service_name: "nginx"
-http_server_data_dir: "/usr/share/nginx/html"
-http_server_ignition_files_dir_name: "ignition"
+openshift_append_bootstrap_ign_name: "append-bootstrap.ign"
+openshift_ignition_config_files_root_names:
+  - "master"
+  - "worker"
+  - "append-bootstrap"

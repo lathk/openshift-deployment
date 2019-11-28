@@ -23,7 +23,7 @@
   shell:
     cmd: "base64 -w0 < {{ item }}.ign > {{ item }}.64"
     chdir: "{{ openshift_working_directory_path }}"
-  loop: "{{ ignition_config_files }}"
+  loop: "{{ openshift_ignition_config_files_root_names }}"
 
 - name: "copy ignition files to http server"
   copy:
