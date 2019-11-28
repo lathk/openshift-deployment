@@ -1,0 +1,39 @@
+---
+# defaults file for provision_vmware_node
+
+ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
+
+bootstrap_node:
+  name: "ocp-bootstrap_node"
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.ign"
+
+master_nodes_list:
+  - "ocp-master1"
+  - "ocp-master2"
+  - "ocp-master3"
+
+master_node:
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/master.ign"
+
+worker_nodes_list:
+  - "ocp-worker1"
+  - "ocp-worker2"
+  - "ocp-worker3"
+
+worker_node:
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/worker.ign"

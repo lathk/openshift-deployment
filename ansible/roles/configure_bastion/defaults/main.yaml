@@ -14,12 +14,27 @@ http_server_service_name: "nginx"
 http_server_data_dir: "/usr/share/nginx/html"
 http_server_ignition_files_dir_name: "ignition"
 
-# general OpenShift vars
+# OpenShift install-config vars (should be replaced)
 
 openshift_version: "4.2.7"
+openshift_cluster_name: "ocp-cluster"
+
+openshift_base_domain: "example.com"
+openshift_worker_replicas_number: "0"
+openshift_master_replicas_number: "3"
+openshift_cluster_name: "ocp-cluster"
+
+openshift_vcenter:
+  hostname: "your.vcenter.server"
+  username: "your_vsphere_username"
+  password: "your_vsphere_password"
+  datacenter: "your_datacenter"
+  default_datastore: "your_datastore"
+
+# general OpenShift vars
 
 openshift_binary_dir: "/usr/bin"
-openshift_working_directory_name: "ocp-cluster"
+openshift_working_directory_name: "{{ openshift_cluster_name }}"
 openshift_working_directory_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
 openshift_binaries_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}"
 
@@ -34,20 +49,6 @@ openshift_oc_client_binary_mode: "0755"
 _openshift_oc_client_cmd: "{{ openshift_binary_dir }}/{{ openshift_oc_client_binary_name }}"
 
 openshift_install_config_yaml_name: "install-config.yaml"
-
-# OpenShift install-config vars (should be replaced)
-
-openshift_base_domain: "example.com"
-openshift_worker_replicas_number: "0"
-openshift_master_replicas_number: "3"
-openshift_cluster_name: "ocp-cluster"
-
-openshift_vcenter:
-  hostname: "your.vcenter.server"
-  username: "your_vsphere_username"
-  password: "your_vsphere_password"
-  datacenter: "your_datacenter"
-  default_datastore: "your_datastore"
 
 # OpenShift ignition config files vars
 

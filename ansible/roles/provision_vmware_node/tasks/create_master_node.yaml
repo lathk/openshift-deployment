@@ -1,0 +1,30 @@
+---
+- name: "clone from rhcos ova for masters"
+  vmware_guest:
+    hostname: "{{ vcenter.host }}"
+    username: "{{ vcenter.user }}"
+    password: "{{ vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ vcenter.datacenter }}"
+    folder: "{{ vcenter.folder }}"
+    cluster: "{{ vcenter.cluster }}"
+    template: "{{ vcenter.template }}"
+    name: "{{ master_node.name }}"
+    state: "poweredoff"
+    disk:
+    - datastore: "{{ vcenter.default_datastore }}"
+      type: "{{ master_node.disk.type }}"
+      size_gb: "{{ master_node.disk.size }}"
+    hardware:
+      memory: "{{ master_node.ram }}"
+      num_cpus: "{{ master_node.cpus }}"
+    customvalues:
+      - key: disk.EnableUUID
+        value: 'TRUE'
+      - key: sched.cpu.latencySensitivity
+        value: 'high'
+      - key: guestinfo.ignition.config.data.encoding
+        value: 'base64'
+      - key: guestinfo.ignition.config.data
+        value: "{{ lookup('file', master_node.ignition_file_path) }}"
+  loop: "{{ master_nodes_list }}"
