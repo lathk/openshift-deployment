@@ -42,11 +42,12 @@ openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 openshift_cluster_name: "ocp-cluster"
 
-openshift_vcenter_hostname: "your.vcenter.server"
-openshift_vcenter_username: "your_vsphere_username"
-openshift_vcenter_password: "your_vsphere_password"
-openshift_vcenter_datacenter: "your_datacenter"
-openshift_vcenter_default_datastore: "your_datastore"
+openshift_vcenter:
+  hostname: "your.vcenter.server"
+  username: "your_vsphere_username"
+  password: "your_vsphere_password"
+  datacenter: "your_datacenter"
+  default_datastore: "your_datastore"
 
 # OpenShift ignition config files vars
 
