@@ -1,5 +1,5 @@
 ---
 - name: "Configure bastion from when OpenShift will be installed"
-  hosts: all
+  hosts: localhost
   roles:
     - configure_bastion
