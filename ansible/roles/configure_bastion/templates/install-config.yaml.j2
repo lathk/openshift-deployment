@@ -17,11 +17,11 @@ metadata:
   name: {{ openshift_cluster_name }}
 platform:
   vsphere:
-    vcenter: {{ vcenter_hostname }}
-    username: {{ vcenter_username }}
-    password: {{ vcenter_password }}
-    datacenter: {{ vcenter_datacenter }}
-    defaultDatastore: {{ vcenter_default_datastore }}
+    vcenter: {{ openshift_vcenter_hostname }}
+    username: {{ openshift_vcenter_username }}
+    password: {{ openshift_vcenter_password }}
+    datacenter: {{ openshift_vcenter_datacenter }}
+    defaultDatastore: {{ openshift_vcenter_default_datastore }}
 pullSecret: '{{ openshift_pull_secret | default('') }}'
 ## The default SSH key that will be programmed for `core` user.
 sshKey: |
