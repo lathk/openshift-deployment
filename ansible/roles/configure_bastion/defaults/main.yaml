@@ -1,0 +1,53 @@
+---
+# defaults file for configure_bastion
+
+tools_packages:
+  - jq
+  - tmux
+
+ssh_key_name: "cluster-ocp-key"
+
+# general OpenShift vars
+
+openshift_version: "4.2.7"
+
+openshift_binary_dir: "/usr/bin"
+openshift_working_directory_name: "ocp-cluster"
+openshift_working_directory_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
+openshift_binaries_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}"
+
+openshift_installer_binary_url: "{{ openshift_binaries_url }}/openshift-install-linux-{{ openshift_version }}.tar.gz"
+openshift_installer_binary_name: "openshift-install"
+openshift_installer_binary_mode: "0755"
+_openshift_installer_cmd: "{{ openshift_binary_dir }}/{{ openshift_installer_binary_name }}"
+
+openshift_oc_client_binary_url: "{{ openshift_binaries_url }}/openshift-client-linux-{{ openshift_version }}.tar.gz"
+openshift_oc_client_binary_name: "oc"
+openshift_oc_client_binary_mode: "0755"
+_openshift_oc_client_cmd: "{{ openshift_binary_dir }}/{{ openshift_oc_client_binary_name }}"
+
+openshift_install_config_yaml_name: "install-config.yaml"
+
+# OpenShift install-config vars (should be replaced)
+
+openshift_base_domain: "example.com"
+openshift_worker_replicas_number: "0"
+openshift_master_replicas_number: "3"
+openshift_cluster_name: "ocp-cluster"
+
+vcenter_hostname: "your.vcenter.server"
+vcenter_username: "your_vsphere_username"
+vcenter_password: "your_vsphere_password"
+vcenter_datacenter: "your_datacenter"
+vcenter_default_datastore: "your_datastore"
+
+# OpenShift ignition config files vars
+
+openshift_append_bootstrap_ign_name: "append-bootstrap"
+
+# HTTP server
+
+http_server_package_name: "nginx"
+http_server_service_name: "nginx"
+http_server_data_dir: "/usr/share/nginx/html"
+http_server_ignition_files_dir_name: "ignition"

@@ -1,0 +1,10 @@
+---
+- name: "get oc client"
+  unarchive:
+    src: "{{ openshift_oc_client_binary_url }}"
+    dest: "{{ openshift_binary_dir }}"
+    mode: "{{ openshift_oc_client_binary_mode }}"
+    remote_src: "true"
+
+- name: "enable oc auto-completion"
+  command: "{{ _openshift_oc_client_cmd }} completion bash >/etc/bash_completion.d/openshift"

@@ -1,0 +1,7 @@
+---
+- name: "download OpenShift binary"
+  unarchive:
+    src: "{{ openshift_installer_binary_url }}"
+    dest: "{{ openshift_binary_dir }}"
+    mode: "{{ openshift_installer_binary_mode }}"
+    remote_src: "true"

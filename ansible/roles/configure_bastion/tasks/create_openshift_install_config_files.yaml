@@ -1,0 +1,31 @@
+---
+- name: "create working directory"
+  file:
+    path: "{{ openshift_working_directory_path }}"
+    state: directory
+
+- name: "copy install-config.yaml"
+  template:
+    src: "{{ openshift_install_config_yaml_name }}.j2"
+    dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
+
+- name: "create ignition config files"
+  shell:
+    cmd: "{{ _openshift_installer_cmd }} --dir {{ openshift_working_directory_path }} create ignition-configs"
+  register: ignition_creation
+
+- name: "create append-bootstrap ignition file"
+  template:
+    src: "{{ openshift_append_bootstrap_ign_name }}.j2"
+    dest: "{{ openshift_working_directory_path }}/{{ openshift_append_bootstrap_ign_name }}"
+
+- name: "encode ignition files into base64"
+  shell:
+    cmd: "base64 -w0 < {{ item }}.ign > {{ item }}.64"
+    chdir: "{{ openshift_working_directory_path }}"
+  loop: "{{ ignition_config_files }}"
+
+- name: "copy ignition files to http server"
+  copy:
+    src: "{{ openshift_working_directory_path }}/bootstrap.ign"
+    dest: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}/bootstrap.ign"

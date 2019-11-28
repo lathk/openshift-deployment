@@ -1,0 +1,9 @@
+---
+- name: "install tools on bastion"
+  yum:
+    name: "{{ item }}"
+    state: "installed"
+  loop: "{{ tools_packages }}"
+
+- name: "generate ssh key"
+  shell: "ssh-keygen -f ~/.ssh/{{ ssh_key_name }} -N ''"

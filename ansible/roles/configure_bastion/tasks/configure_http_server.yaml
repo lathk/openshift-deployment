@@ -1,0 +1,15 @@
+---
+- name: "install http packages"
+  yum:
+    name: "{{ http_server_package_name }}"
+    state: "installed"
+
+- name: "start http service"
+  service:
+    name: "{{ http_server_service_name }}"
+    state: "started"
+
+- name: "create ignition files http directory"
+  file:
+    path: "{{ http_server_data_dir }}/{{ http_ignition_files_dir_name }}"
+    state: "directory"

@@ -259,3 +259,9 @@ Leave the `claim` filed blank to allow the automatic creation of an `image-regis
 ```shell
 oc get clusteroperator image-registry
 ```
+
+### Completing installation
+
+```shell
+openshift-install --dir ocp-vsphere wait-for install-complete
+```
