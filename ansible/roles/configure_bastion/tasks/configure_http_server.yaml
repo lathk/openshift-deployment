@@ -11,5 +11,5 @@
 
 - name: "create ignition files http directory"
   file:
-    path: "{{ http_server_data_dir }}/{{ http_ignition_files_dir_name }}"
+    path: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}"
     state: "directory"
