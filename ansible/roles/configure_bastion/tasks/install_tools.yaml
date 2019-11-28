@@ -10,5 +10,5 @@
   register: ssh_key_exists
 
 - name: "generate ssh key"
-  shell: "ssh-keygen -f {{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }} -N ''"
+  shell: "ssh-keygen -f ~/.ssh/{{ ssh_key_name }} -N ''"
   when: not ssh_key_exists.stat.exists
