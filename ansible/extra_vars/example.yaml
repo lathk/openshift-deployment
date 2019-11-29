@@ -9,6 +9,9 @@ openshift_master_replicas_number: "3"
 openshift_cluster_name: "ocp-cluster"
 
 # OpenShift nodes list
+bootstrap_nodes_list:
+  - "ocp-bootstrap"
+
 master_nodes_list:
   - "ocp-master1"
   - "ocp-master2"
