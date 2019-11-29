@@ -2,7 +2,7 @@
 - name: "clone from rhcos ova for masters"
   vmware_guest:
     hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.user }}"
+    username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"
     validate_certs: no
     datacenter: "{{ openshift_vcenter.datacenter }}"

@@ -2,7 +2,7 @@
 - name: get vm template folder
   vmware_guest_find:
     hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.user }}"
+    username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"
     validate_certs: no
     datacenter: "{{ openshift_vcenter.datacenter }}"
@@ -16,7 +16,7 @@
 - name: get vm template facts
   vmware_guest_info:
     hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.user }}"
+    username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"
     validate_certs: no
     datacenter: "{{ openshift_vcenter.datacenter }}"
