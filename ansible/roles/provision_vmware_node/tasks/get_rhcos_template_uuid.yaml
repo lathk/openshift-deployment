@@ -7,16 +7,16 @@
 
 - name: set fact vm_template_folder
   set_fact:
-    vm_template_folder: "{{ r_template_folder.folders | select('search', vm_datacenter) | first }}"
+    vm_template_folder: "{{ r_template_folder.folders | select('search', openshift_vcenter.datacenter) | first }}"
 
 - name: get vm template facts
   vmware_guest_facts:
     validate_certs: no
-    datacenter: "{{ vm_datacenter }}"
+    datacenter: "{{ openshift_vcenter.datacenter }}"
     folder: "{{ vm_template_folder }}"
-    name: "{{ vm_template }}"
+    name: "{{ openshift_rhcos_template_name }}"
   register: r_vm_facts
 
 - name: set fact vm_template_uuid
   set_fact:
-    vm_template_uuid: "{{ r_vm_facts.instance.hw_product_uuid }}"
+    openshift_rhcos_template_uuid: "{{ r_vm_facts.instance.hw_product_uuid }}"
