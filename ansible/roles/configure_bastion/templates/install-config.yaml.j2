@@ -1,28 +1,26 @@
 apiVersion: v1
-baseDomain: {{ openshift_base_domain }}
+baseDomain: '{{ openshift_base_domain }}'
 {% if openshift_proxy is defined %}
 proxy:
-  httpProxy: {{ openshift_proxy.http }}
-  httpsProxy: {{ openshift_proxy.https }}
-  noProxy: {{ openshift_proxy.no_proxy }}
+  httpProxy: '{{ openshift_proxy.http }}'
+  httpsProxy: '{{ openshift_proxy.https }}'
+  noProxy: '{{ openshift_proxy.no_proxy }}'
 {% endif %}
 compute:
 - name: worker
-  replicas: {{ openshift_worker_replicas_number }}
+  replicas: '{{ openshift_worker_replicas_number }}'
 controlPlane:
   name: master
-  replicas: {{ openshift_master_replicas_number }}
+  replicas: '{{ openshift_master_replicas_number }}'
 metadata:
-  ## The name for the cluster
-  name: {{ openshift_cluster_name }}
+  name: '{{ openshift_cluster_name }}'
 platform:
   vsphere:
-    vcenter: {{ openshift_vcenter.host }}
-    username: {{ openshift_vcenter.username }}
-    password: {{ openshift_vcenter.password }}
-    datacenter: {{ openshift_vcenter.datacenter }}
-    defaultDatastore: {{ openshift_vcenter.default_datastore }}
+    vcenter: '{{ openshift_vcenter.host }}'
+    username: '{{ openshift_vcenter.username }}'
+    password: '{{ openshift_vcenter.password }}'
+    datacenter: '{{ openshift_vcenter.datacenter }}'
+    defaultDatastore: '{{ openshift_vcenter.default_datastore }}'
 pullSecret: '{{ openshift_pull_secret | default('') }}'
-## The default SSH key that will be programmed for `core` user.
 sshKey: |
   {{ ssh_key }}
