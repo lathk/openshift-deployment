@@ -28,6 +28,7 @@ openshift_vcenter:
   cluster: "your_cluster"
   default_datastore: "your_datastore"
   folder: "your_folder"
+  rhcos_template: "rhcos_template_name"
 
 # Proxy variables
 openshift_proxy:
