@@ -1,10 +1,16 @@
 ---
+- name: "stat oc client"
+  stat:
+    path: "{{ openshift_binary_dir }}/{{ openshift_installer_binary_name }}"
+  register: r_oc_client_bin
+
 - name: "get oc client"
   unarchive:
     src: "{{ openshift_oc_client_binary_url }}"
     dest: "{{ openshift_binary_dir }}"
     mode: "{{ openshift_oc_client_binary_mode }}"
     remote_src: "true"
+  when: not r_oc_client_bin.stat.exists
 
 - name: "enable oc auto-completion"
   shell: "{{ _openshift_oc_client_cmd }} completion bash >/etc/bash_completion.d/openshift"

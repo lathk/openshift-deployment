@@ -1,4 +1,9 @@
 ---
+- name: "set ssh_key_path"
+  set_fact:
+    ssh_key_path: "{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}"
+
+
 - name: "install tools on bastion"
   package:
     name: "{{ item }}"
@@ -6,9 +11,14 @@
   loop: "{{ tools_packages }}"
 
 - stat:
-    path: "{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}"
+    path: "{{ ssh_key_path }}"
   register: ssh_key_exists
 
 - name: "generate ssh key"
-  shell: "ssh-keygen -f {{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }} -N ''"
+  shell: "ssh-keygen -f {{ ssh_key_path }} -N ''"
   when: not ssh_key_exists.stat.exists
+
+
+- name: "set ssh_key var"
+  set_fact:
+    ssh_key: "{{ lookup('file', ssh_key_path) }}"
