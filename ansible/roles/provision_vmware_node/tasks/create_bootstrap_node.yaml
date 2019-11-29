@@ -18,13 +18,14 @@
     hardware:
       memory: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"
-    customvalues:
-      - key: disk.EnableUUID
-        value: 'TRUE'
-      - key: sched.cpu.latencySensitivity
-        value: 'high'
-      - key: guestinfo.ignition.config.data.encoding
-        value: 'base64'
-      - key: guestinfo.ignition.config.data
-        value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
   loop: "{{ bootstrap_nodes_list }}"
+
+- name: "add custom attributes to rhcos ova"
+  vmware_guest_custom_attributes:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    uuid: "{{ openshift_rhcos_template_uuid }}"
+    state: present
+    attributes: "{{ openshift_rhcos_template_custom_attributes }}"

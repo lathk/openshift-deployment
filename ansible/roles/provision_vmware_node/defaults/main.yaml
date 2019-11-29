@@ -8,7 +8,7 @@ openshift_rhcos_template_custom_attributes:
   - name: "guestinfo.ignition.config.data.encoding"
     value: "base64"
   - name: "guestinfo.ignition.config.data"
-    value: "CHANGEME"  
+    value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"  
 
 ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
 
