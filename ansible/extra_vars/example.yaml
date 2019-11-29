@@ -6,7 +6,6 @@ openshift_cluster_name: "ocp-cluster"
 openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
-openshift_cluster_name: "ocp-cluster"
 
 # OpenShift nodes list
 bootstrap_nodes_list:
