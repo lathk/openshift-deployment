@@ -30,6 +30,7 @@ openshift_vcenter:
   password: "your_vsphere_password"
   datacenter: "your_datacenter"
   default_datastore: "your_datastore"
+  rhcos_template: "rhcos_template_name"
 
 # general OpenShift vars
 

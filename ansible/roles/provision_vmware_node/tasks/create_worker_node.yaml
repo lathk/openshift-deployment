@@ -8,7 +8,7 @@
     datacenter: "{{ openshift_vcenter.datacenter }}"
     folder: "{{ openshift_vcenter.folder }}"
     cluster: "{{ openshift_vcenter.cluster }}"
-    template: "{{ rhcos_template }}"
+    template: "{{ openshift_vcenter.rhcos_template }}"
     name: "{{ item }}"
     state: "poweredoff"
     disk:
