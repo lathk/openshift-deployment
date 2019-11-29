@@ -9,7 +9,7 @@
     folder: "{{ openshift_vcenter.folder }}"
     cluster: "{{ openshift_vcenter.cluster }}"
     template: "{{ rhcos_template }}"
-    name: "{{ worker_node.name }}"
+    name: "{{ item }}"
     state: "poweredoff"
     disk:
     - datastore: "{{ openshift_vcenter.default_datastore }}"

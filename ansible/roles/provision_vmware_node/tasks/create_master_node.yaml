@@ -9,7 +9,7 @@
     folder: "{{ openshift_vcenter.folder }}"
     cluster: "{{ openshift_vcenter.cluster }}"
     template: "{{ openshift_vcenter.template }}"
-    name: "{{ master_node.name }}"
+    name: "{{ item }}"
     state: "poweredoff"
     disk:
     - datastore: "{{ openshift_vcenter.default_datastore }}"

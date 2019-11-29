@@ -1,0 +1,5 @@
+---
+- name: "Provisionning openshift nodes on VMware"
+  hosts: localhost
+  roles:
+    - provision_vmware_node

@@ -1,0 +1,6 @@
+---
+- name: "Install OpenShift"
+  hosts: localhost
+  roles:
+    - configure_bastion
+    - provision_vmware_node

@@ -3,6 +3,9 @@
 
 ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
 
+bootstrap_nodes_list:
+  - "ocp-bootstrap"
+
 bootstrap_node:
   name: "ocp-bootstrap_node"
   ram: "16384"

@@ -9,7 +9,7 @@
     folder: "{{ openshift_vcenter.folder }}"
     cluster: "{{ openshift_vcenter.cluster }}"
     template: "{{ openshift_vcenter.template }}"
-    name: "{{ bootstrap_node.name }}"
+    name: "{{ item }}"
     state: "poweredoff"
     disk:
     - datastore: "{{ openshift_vcenter.default_datastore }}"
@@ -27,3 +27,4 @@
         value: 'base64'
       - key: guestinfo.ignition.config.data
         value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+  loop: "{{ bootstrap_nodes_list }}"
