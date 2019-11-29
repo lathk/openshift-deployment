@@ -1,0 +1,30 @@
+---
+# OpenShift variables
+openshift_version: "4.2.7"
+openshift_cluster_name: "ocp-cluster"
+
+openshift_base_domain: "example.com"
+openshift_worker_replicas_number: "0"
+openshift_master_replicas_number: "3"
+openshift_cluster_name: "ocp-cluster"
+
+# vCenter variables
+openshift_vcenter:
+  hostname: "your.vcenter.server"
+  username: "your_vsphere_username"
+  password: "your_vsphere_password"
+  datacenter: "your_datacenter"
+  cluster: "your_cluster"
+  default_datastore: "your_datastore"
+  folder: "your_folder"
+
+# OpenShift nodes list
+master_nodes_list:
+  - "ocp-master1"
+  - "ocp-master2"
+  - "ocp-master3"
+
+worker_nodes_list:
+  - "ocp-worker1"
+  - "ocp-worker2"
+  - "ocp-worker3"

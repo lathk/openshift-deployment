@@ -1,18 +1,18 @@
 ---
 - name: "clone from rhcos ova"
   vmware_guest:
-    hostname: "{{ vcenter.host }}"
-    username: "{{ vcenter.user }}"
-    password: "{{ vcenter.password }}"
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.user }}"
+    password: "{{ openshift_vcenter.password }}"
     validate_certs: no
-    datacenter: "{{ vcenter.datacenter }}"
-    folder: "{{ vcenter.folder }}"
-    cluster: "{{ vcenter.cluster }}"
-    template: "{{ vcenter.template }}"
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    folder: "{{ openshift_vcenter.folder }}"
+    cluster: "{{ openshift_vcenter.cluster }}"
+    template: "{{ openshift_vcenter.template }}"
     name: "{{ bootstrap_node.name }}"
     state: "poweredoff"
     disk:
-    - datastore: "{{ vcenter.default_datastore }}"
+    - datastore: "{{ openshift_vcenter.default_datastore }}"
       type: "{{ bootstrap_node.disk.type }}"
       size_gb: "{{ bootstrap_node.disk.size }}"
     hardware:
