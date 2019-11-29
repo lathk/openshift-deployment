@@ -1,6 +1,8 @@
 ---
 # defaults file for provision_vmware_node
 
+openshift_rhcos_template_name: "rhcos"
+
 ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
 
 bootstrap_nodes_list:
