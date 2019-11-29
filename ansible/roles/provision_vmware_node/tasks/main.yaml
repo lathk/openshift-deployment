@@ -1,6 +1,7 @@
 ---
 # tasks file for provision_vmware_node
 - include_tasks: "get_rhcos_template_uuid.yaml"
+- include_tasks: "add_custom_attributes.yaml"
 - include_tasks: "create_bootstrap_node.yaml"
 - include_tasks: "create_master_node.yaml"
 - include_tasks: "create_worker_node.yaml"

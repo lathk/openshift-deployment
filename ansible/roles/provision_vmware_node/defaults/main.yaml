@@ -2,6 +2,13 @@
 # defaults file for provision_vmware_node
 
 openshift_rhcos_template_name: "rhcos"
+openshift_rhcos_template_custom_attributes:
+  - name: "disk.EnableUUID"
+    value: "TRUE"
+  - name: "guestinfo.ignition.config.data.encoding"
+    value: "base64"
+  - name: "guestinfo.ignition.config.data"
+    value: "CHANGEME"  
 
 ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
 
