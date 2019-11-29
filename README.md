@@ -14,7 +14,8 @@ HAProxy Servers
 
 ## Documentation
 
-[VMware part](./doc/vmware.md)
+[Manuel Installation VMware part](./doc/vmware.md)
 
+[Ansible Provisionning](./doc/OCPDeploymentViaAnsible.md)
 
 [Adding BareMetal Server](./doc/AddBMWorker.md)
