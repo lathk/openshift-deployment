@@ -28,7 +28,6 @@
     validate_certs: no
     datacenter: "{{ openshift_vcenter.datacenter }}"
     folder: "{{ openshift_vcenter.folder }}"
-    cluster: "{{ openshift_vcenter.cluster }}"
     name: "{{ item }}"
     state: present
     attributes: "{{ openshift_rhcos_template_custom_attributes }}"
