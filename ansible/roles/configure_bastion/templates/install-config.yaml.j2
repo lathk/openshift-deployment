@@ -8,10 +8,10 @@ proxy:
 {% endif %}
 compute:
 - name: worker
-  replicas: '{{ openshift_worker_replicas_number }}'
+  replicas: {{ openshift_worker_replicas_number }}
 controlPlane:
   name: master
-  replicas: '{{ openshift_master_replicas_number }}'
+  replicas: {{ openshift_master_replicas_number }}
 metadata:
   name: '{{ openshift_cluster_name }}'
 platform:
