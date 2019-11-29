@@ -15,4 +15,6 @@ HAProxy Servers
 ## Documentation
 
 [VMware part](./doc/vmware.md)
+
+
 [Adding BareMetal Server](./doc/AddBMWorker.md)
