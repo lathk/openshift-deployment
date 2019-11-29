@@ -1,6 +1,6 @@
 ---
 - name: "install tools on bastion"
-  yum:
+  package:
     name: "{{ item }}"
     state: "installed"
   loop: "{{ tools_packages }}"

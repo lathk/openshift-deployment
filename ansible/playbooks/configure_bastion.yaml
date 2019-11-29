@@ -3,3 +3,5 @@
   hosts: localhost
   roles:
     - configure_bastion
+
+  environment: "{{ openshift_proxy | default(omit) }}"
