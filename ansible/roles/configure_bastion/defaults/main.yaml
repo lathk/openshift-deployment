@@ -23,7 +23,7 @@ openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 
 openshift_vcenter:
-  hostname: "your_vcenter_server"
+  host: "your_vcenter_server"
   username: "your_vsphere_username"
   password: "your_vsphere_password"
   datacenter: "your_datacenter"

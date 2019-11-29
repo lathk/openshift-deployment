@@ -2,7 +2,7 @@
 - name: get vm template folder
   vmware_guest_find:
     validate_certs: no
-    name: "{{ vm_template }}"
+    name: "{{ openshift_rhcos_template_name }}"
   register: r_template_folder
 
 - name: set fact vm_template_folder

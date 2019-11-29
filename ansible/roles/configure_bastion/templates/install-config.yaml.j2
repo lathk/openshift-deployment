@@ -17,7 +17,7 @@ metadata:
   name: {{ openshift_cluster_name }}
 platform:
   vsphere:
-    vcenter: {{ openshift_vcenter.hostname }}
+    vcenter: {{ openshift_vcenter.host }}
     username: {{ openshift_vcenter.username }}
     password: {{ openshift_vcenter.password }}
     datacenter: {{ openshift_vcenter.datacenter }}
