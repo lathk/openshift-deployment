@@ -4,3 +4,5 @@
   roles:
     - configure_bastion
     - provision_vmware_node
+
+  environment: "{{ openshift_proxy | default(omit) }}"

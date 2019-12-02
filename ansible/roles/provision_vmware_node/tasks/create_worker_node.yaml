@@ -28,3 +28,22 @@
       - key: guestinfo.ignition.config.data
         value: "{{ lookup('file', worker_node.ignition_file_path) }}"
   loop: "{{ worker_nodes_list }}"
+
+- name: "add custom attributes to rhcos ova"
+  vmware_guest_custom_attributes:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: present
+    attributes:
+      - name: "disk.EnableUUID"
+        value: "TRUE"
+      - name: "guestinfo.ignition.config.data.encoding"
+        value: "base64"
+      - name: "guestinfo.ignition.config.data"
+        value: "{{ lookup('file', worker_node.ignition_file_path) }}"
+  loop: "{{ worker_nodes_list }}"

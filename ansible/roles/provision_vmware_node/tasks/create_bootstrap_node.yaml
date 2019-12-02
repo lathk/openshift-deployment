@@ -18,7 +18,6 @@
     - datastore: "{{ openshift_vcenter.default_datastore }}"
       type: "{{ bootstrap_node.disk.type }}"
       size_gb: "{{ bootstrap_node.disk.size }}"
-    convert: "thin"
     hardware:
       memory: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"
