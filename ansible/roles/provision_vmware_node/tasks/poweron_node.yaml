@@ -8,5 +8,4 @@
     folder: "{{ openshift_vcenter.folder }}"
     name: "{{ item }}"
     state: "powered-on"
-  loop:
-    - "{{ bootstrap_nodes_list + master_nodes_list + worker_nodes_list }}"
+  loop: "{{ bootstrap_nodes_list + master_nodes_list + worker_nodes_list }}"
