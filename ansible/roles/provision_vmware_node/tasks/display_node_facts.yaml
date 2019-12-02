@@ -26,4 +26,5 @@
   register: r_node_facts
 
 - debug:
-    var: r_node_facts
+    msg: "{{ item.instance.hw_eth0.macaddress }}"
+  loop: r_node_facts.results
