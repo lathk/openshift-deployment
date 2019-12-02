@@ -1,7 +1,7 @@
 ---
 # tasks file for configure_bastion
 
-- include_tasks: "install_tools.yaml"
+#- include_tasks: "install_tools.yaml"
 - include_tasks: "get_openshift_binary.yaml"
 - include_tasks: "install_oc_client.yaml"
 - include_tasks: "configure_http_server.yaml"
