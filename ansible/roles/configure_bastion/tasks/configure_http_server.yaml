@@ -13,6 +13,9 @@
   file:
     path: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}"
     state: "directory"
+    owner: "{{ http_server_user }}"
+    group: "{{ http_server_group }}"
+    recurse: true
 
 - name: "allow http on firewalld"
   firewalld:
