@@ -1,7 +1,18 @@
 ---
 - name: "Poweron openshift nodes on VMware"
-  hosts:
+  hosts: localhost
   tasks:
     - include_role:
         name: "provision_vmware_node"
         tasks_from: "poweron_node.yaml"
+      loop: "{{ bootstrap_nodes_list }}"
+
+    - include_role:
+        name: "provision_vmware_node"
+        tasks_from: "poweron_node.yaml"
+      loop: "{{ master_nodes_list }}"
+
+    - include_role:
+        name: "provision_vmware_node"
+        tasks_from: "poweron_node.yaml"
+      loop: "{{ worker_nodes_list }}"
