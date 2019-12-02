@@ -22,4 +22,11 @@
     service: "{{ item }}"
     state: enabled
     permanent: "true"
-  loop: "{{ firewall_rules }}"
+  loop: "{{ firewall_service_rules }}"
+
+- name: "allow port on firewalld"
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: "true"
+  loop: "{{ firewall_port_rules }}"

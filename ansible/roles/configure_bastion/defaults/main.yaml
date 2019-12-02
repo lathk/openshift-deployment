@@ -4,9 +4,13 @@
 tools_packages:
   - tmux
 
-firewall_rules:
+firewall_service_rules:
   - http
   - https
+
+firewall_port_rules:
+  - "6443/tcp"
+  - "22643/tcp"
 
 ssh_key_name: "cluster-ocp-key"
 
