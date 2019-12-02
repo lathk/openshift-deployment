@@ -1,11 +1,12 @@
 ---
 # defaults file for configure_bastion
-#TODO: fix that
-ansible_python_interpreter: /usr/bin/python2.7
-
 
 tools_packages:
   - tmux
+
+firewall_rules:
+  - http
+  - https
 
 ssh_key_name: "cluster-ocp-key"
 

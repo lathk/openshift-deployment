@@ -4,7 +4,7 @@ baseDomain: '{{ openshift_base_domain }}'
 proxy:
   httpProxy: '{{ openshift_proxy.http }}'
   httpsProxy: '{{ openshift_proxy.https }}'
-  noProxy: '{{ openshift_proxy.no_proxy }}'
+  noProxy: '{{ openshift_base_domain }},{{ openshift_proxy.no_proxy }}'
 {% endif %}
 compute:
 - name: worker

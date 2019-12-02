@@ -1,6 +1,6 @@
 ---
 - name: "install http packages"
-  yum:
+  dnf:
     name: "{{ http_server_package_name }}"
     state: "installed"
 
@@ -13,3 +13,10 @@
   file:
     path: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}"
     state: "directory"
+
+- name: "allow http on firewalld"
+  firewalld:
+    name: "{{ item }}"
+    state: enabled
+    persistent: "true"
+  loop: "{{ firewall_rules }}"
