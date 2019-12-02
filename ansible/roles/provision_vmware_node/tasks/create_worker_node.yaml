@@ -21,8 +21,8 @@
     customvalues:
       - key: disk.EnableUUID
         value: 'TRUE'
-      - key: sched.cpu.latencySensitivity
-        value: 'high'
+  #    - key: sched.cpu.latencySensitivity
+  #      value: 'high'
       - key: guestinfo.ignition.config.data.encoding
         value: 'base64'
       - key: guestinfo.ignition.config.data

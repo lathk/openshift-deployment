@@ -1,4 +1,20 @@
 ---
+- name: "add custom attributes to rhcos ova"
+  vmware_guest_custom_attributes:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: present
+    attributes: "{{ openshift_rhcos_template_custom_attributes }}"
+  loop: "{{ bootstrap_nodes_list }}"
+
+- debug:
+    msg: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+
 - name: "clone from rhcos ova"
   vmware_guest:
     hostname: "{{ openshift_vcenter.host }}"
@@ -18,17 +34,4 @@
     hardware:
       memory: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"
-  loop: "{{ bootstrap_nodes_list }}"
-
-- name: "add custom attributes to rhcos ova"
-  vmware_guest_custom_attributes:
-    hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.username }}"
-    password: "{{ openshift_vcenter.password }}"
-    validate_certs: no
-    datacenter: "{{ openshift_vcenter.datacenter }}"
-    folder: "{{ openshift_vcenter.folder }}"
-    name: "{{ item }}"
-    state: present
-    attributes: "{{ openshift_rhcos_template_custom_attributes }}"
   loop: "{{ bootstrap_nodes_list }}"
