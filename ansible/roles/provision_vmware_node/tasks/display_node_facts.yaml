@@ -27,4 +27,4 @@
 
 - debug:
     msg: "{{ item }} -> {{ item.instance.hw_eth0.macaddress }}"
-  loop: r_node_facts.results
+  loop: "{{ r_node_facts.results }}"
