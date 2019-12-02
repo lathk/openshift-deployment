@@ -1,0 +1,7 @@
+---
+- name: "Poweron openshift nodes on VMware"
+  hosts:
+  tasks:
+    - include_role:
+        name: "provision_vmware_node"
+        tasks_from: "poweron_node.yaml"
