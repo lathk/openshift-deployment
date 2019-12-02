@@ -22,5 +22,4 @@ platform:
     datacenter: '{{ openshift_vcenter.datacenter }}'
     defaultDatastore: '{{ openshift_vcenter.default_datastore }}'
 pullSecret: '{{ openshift_pull_secret | default('') }}'
-sshKey: |
-  {{ ssh_key }}
+sshKey: '{{ ssh_key }}'
