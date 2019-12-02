@@ -1,5 +1,5 @@
 ---
-- name: "clone from rhcos ova for masters"
+- name: "clone from rhcos ova for worker"
   vmware_guest:
     hostname: "{{ openshift_vcenter.host }}"
     username: "{{ openshift_vcenter.username }}"
