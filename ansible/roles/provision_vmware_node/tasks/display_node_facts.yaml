@@ -28,7 +28,3 @@
 - debug:
     msg: "{{ item.instance.hw_name }} -> {{ item.instance.hw_eth0.macaddress }}"
   loop: "{{ r_node_facts.results }}"
-
-- debug:
-    msg: "{{ item.hw_name }} -> {{ item.hw_eth0.macaddress }}"
-  loop: "{{ r_node_facts | json_query('results[*].instance') }}"
