@@ -34,4 +34,13 @@
     hardware:
       memory: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"
+    customvalues:
+      - key: disk.EnableUUID
+        value: 'TRUE'
+#      - key: sched.cpu.latencySensitivity
+#        value: 'high'
+      - key: guestinfo.ignition.config.data.encoding
+        value: 'base64'
+      - key: guestinfo.ignition.config.data
+        value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
   loop: "{{ bootstrap_nodes_list }}"

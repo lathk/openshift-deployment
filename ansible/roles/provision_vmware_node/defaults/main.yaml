@@ -23,7 +23,7 @@ bootstrap_node:
   disk:
     size: "120"
     type: "thin"
-  ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.ign"
+  ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.64"
 
 master_nodes_list:
   - "ocp-master1"
@@ -36,7 +36,7 @@ master_node:
   disk:
     size: "120"
     type: "thin"
-  ignition_file_path: "{{ ignition_files_path }}/master.ign"
+  ignition_file_path: "{{ ignition_files_path }}/master.64"
 
 worker_nodes_list:
   - "ocp-worker1"
@@ -49,4 +49,4 @@ worker_node:
   disk:
     size: "120"
     type: "thin"
-  ignition_file_path: "{{ ignition_files_path }}/worker.ign"
+  ignition_file_path: "{{ ignition_files_path }}/worker.64"
