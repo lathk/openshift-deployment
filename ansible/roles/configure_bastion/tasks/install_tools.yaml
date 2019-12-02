@@ -8,14 +8,6 @@
     name: "{{ item }}"
     state: "installed"
   loop: "{{ tools_packages }}"
-  when: ansible_python.version.major != 3
-
-- name: "install tools on bastion"
-  dnf:
-    name: "{{ item }}"
-    state: "installed"
-  loop: "{{ tools_packages }}"
-  when: ansible_python.version.major == 3
 
 - stat:
     path: "{{ ssh_key_path }}"
