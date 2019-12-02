@@ -5,3 +5,4 @@ firewall-cmd --reload
 
 
 2. @Mac automatique
+3. update SELinux for HAproxy 
