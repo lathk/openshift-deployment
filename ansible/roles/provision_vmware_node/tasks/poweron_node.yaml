@@ -9,6 +9,4 @@
     name: "{{ item }}"
     state: "powered-on"
   loop:
-    - "{{ bootstrap_nodes_list }}"
-    - "{{ master_nodes_list }}"
-    - "{{ worker_nodes_list }}"
+    - "{{ bootstrap_nodes_list + master_nodes_list + worker_nodes_list }}"

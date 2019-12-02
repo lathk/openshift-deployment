@@ -1,4 +1,18 @@
 ---
+- name: get vm template folder
+  vmware_guest_find:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    name: "{{ openshift_rhcos_template_name }}"
+  register: r_template_folder
+
+- name: set fact vm_template_folder
+  set_fact:
+    vm_template_folder: "{{ r_template_folder.folders | select('search', openshift_vcenter.datacenter) | first }}"
+
 - name: get vm node facts
   vmware_guest_info:
     hostname: "{{ openshift_vcenter.host }}"
@@ -9,8 +23,7 @@
     folder: "{{ openshift_vcenter.folder }}"
     name: "{{ item }}"
   loop:
-    - "{{ master_nodes_list }}"
-    - "{{ worker_nodes_list }}"
+    - "{{ master_nodes_list + worker_nodes_list}}"
   register: r_node_facts
 
 - debug:
