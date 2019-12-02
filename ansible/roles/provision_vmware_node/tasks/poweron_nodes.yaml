@@ -1,0 +1,33 @@
+---
+- name: "set the state of bootstrap node to poweron"
+  vmware_guest_powerstate:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: "powered-on"
+  loop: "{{ bootstrap_nodes_list }}"
+
+- name: "set the state of master nodes to poweron"
+  vmware_guest_powerstate:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: "powered-on"
+  loop: "{{ master_nodes_list }}"
+
+- name: "set the state of worker nodes to poweron"
+  vmware_guest_powerstate:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: "powered-on"
+  loop: "{{ worker_nodes_list }}"
