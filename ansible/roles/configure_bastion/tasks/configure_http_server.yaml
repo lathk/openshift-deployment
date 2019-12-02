@@ -19,7 +19,7 @@
 
 - name: "allow http on firewalld"
   firewalld:
-    name: "{{ item }}"
+    service: "{{ item }}"
     state: enabled
     permanent: "true"
   loop: "{{ firewall_rules }}"
