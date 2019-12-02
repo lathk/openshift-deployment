@@ -3,20 +3,6 @@
   set_fact:
     ssh_key_path: "{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}"
 
-- name: "install tools on bastion"
-  package:
-    name: "{{ item }}"
-    state: "installed"
-  loop: "{{ tools_packages }}"
-  when: ansible_python.version.major != 3
-
-- name: "install tools on bastion"
-  dnf:
-    name: "{{ item }}"
-    state: "installed"
-  loop: "{{ tools_packages }}"
-  when: ansible_python.version.major == 3
-
 - stat:
     path: "{{ ssh_key_path }}"
   register: ssh_key_exists
