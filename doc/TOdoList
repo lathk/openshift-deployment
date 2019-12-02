@@ -1,0 +1,7 @@
+1. Add Firewall port DNS + http
+firewall-cmd --add-service=dns --permanent
+firewall-cmd --add-service=http --permanent
+firewall-cmd --reload
+
+
+2. @Mac automatique
