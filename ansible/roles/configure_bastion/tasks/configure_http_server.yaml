@@ -21,5 +21,5 @@
   firewalld:
     name: "{{ item }}"
     state: enabled
-    persistent: "true"
+    permanent: "true"
   loop: "{{ firewall_rules }}"
