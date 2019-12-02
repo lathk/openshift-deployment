@@ -1,6 +1,6 @@
 ---
 - name: "install http packages"
-  dnf:
+  package:
     name: "{{ http_server_package_name }}"
     state: "installed"
 
