@@ -20,18 +20,17 @@
       memory_reservation_lock: true
       memory_reservation: "{{ master_node.ram }}"
       num_cpus: "{{ master_node.cpus }}"
-#    customvalues:
-#      - key: disk.EnableUUID
-#        value: 'TRUE'
-#      - key: sched.cpu.latencySensitivity
-#        value: 'high'
-#      - key: guestinfo.ignition.config.data.encoding
-#        value: 'base64'
-#      - key: guestinfo.ignition.config.data
-#        value: "{{ lookup('file', master_node.ignition_file_path) }}"
+    customvalues:
+      - key: "disk.EnableUUID"
+        value: "TRUE"
+      - key: "guestinfo.ignition.config.data.encoding"
+        value: "base64"
+      - key: "guestinfo.ignition.config.data"
+        value: "{{ lookup('file', master_node.ignition_file_path) }}"
   loop: "{{ master_nodes_list }}"
 
-- name: "add custom attributes to rhcos ova"
+#TODO: not used in bootstrap?
+- name: "add custom attributes to node"
   vmware_guest_custom_attributes:
     hostname: "{{ openshift_vcenter.host }}"
     username: "{{ openshift_vcenter.username }}"

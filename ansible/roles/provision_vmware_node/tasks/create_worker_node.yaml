@@ -23,14 +23,13 @@
     customvalues:
       - key: disk.EnableUUID
         value: 'TRUE'
-  #    - key: sched.cpu.latencySensitivity
-  #      value: 'high'
       - key: guestinfo.ignition.config.data.encoding
         value: 'base64'
       - key: guestinfo.ignition.config.data
         value: "{{ lookup('file', worker_node.ignition_file_path) }}"
   loop: "{{ worker_nodes_list }}"
 
+#TODO: not used in bootstrap?
 - name: "add custom attributes to rhcos ova"
   vmware_guest_custom_attributes:
     hostname: "{{ openshift_vcenter.host }}"

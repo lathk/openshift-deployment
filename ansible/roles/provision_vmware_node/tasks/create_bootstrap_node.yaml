@@ -1,13 +1,4 @@
 ---
-- name: "add custom attributes to rhcos ova"
-  vmware_guest_custom_attribute_defs:
-    hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.username }}"
-    password: "{{ openshift_vcenter.password }}"
-    validate_certs: no
-    state: present
-    attribute_key: "disk.EnableUUID"
-
 - name: "clone from rhcos ova"
   vmware_guest:
     hostname: "{{ openshift_vcenter.host }}"
@@ -37,3 +28,23 @@
       - key: "guestinfo.ignition.config.data"
         value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
   loop: "{{ bootstrap_nodes_list }}"
+
+#TODO: not used in bootstrap?
+- name: "add custom attributes to node"
+  vmware_guest_custom_attributes:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: present
+    attributes:
+      - name: "disk.EnableUUID"
+        value: "TRUE"
+      - name: "guestinfo.ignition.config.data.encoding"
+        value: "base64"
+      - name: "guestinfo.ignition.config.data"
+        value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+  loop: "{{ master_nodes_list }}"
