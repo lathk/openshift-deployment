@@ -45,5 +45,9 @@
 
 - name: "copy ignition files to http server"
   copy:
-    src: "{{ openshift_working_directory_path }}/bootstrap.ign"
-    dest: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}/bootstrap.ign"
+    src: "{{ openshift_working_directory_path }}/{{ item }}.ign"
+    dest: "{{ http_server_data_dir }}/{{ http_server_ignition_files_dir_name }}/{{ item }}.ign"
+  loop:
+    - "master"
+    - "worker"
+    - "bootstrap"
