@@ -18,6 +18,7 @@
     hardware:
       memory: "{{ worker_node.ram }}"
       memory_reservation_lock: true
+      memory_reservation: "{{ worker_node.ram }}"
       num_cpus: "{{ worker_node.cpus }}"
     customvalues:
       - key: disk.EnableUUID
