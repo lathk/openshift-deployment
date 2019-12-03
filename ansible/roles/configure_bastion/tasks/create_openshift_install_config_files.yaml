@@ -3,12 +3,14 @@
   file:
     path: "{{ openshift_working_directory_path }}"
     state: directory
+  tags: test
 
 - name: "copy install-config.yaml"
   template:
     src: "{{ openshift_install_config_yaml_name }}.j2"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
-
+  tags: test
+  
 - name: "backup install-config.yaml file"
   copy:
     src: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
