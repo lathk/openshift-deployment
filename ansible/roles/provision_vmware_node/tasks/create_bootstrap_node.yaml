@@ -1,6 +1,22 @@
 ---
-- debug:
-    msg: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+- name: "add custom attributes to rhcos ova"
+  vmware_guest_custom_attributes:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    datacenter: "{{ openshift_vcenter.datacenter }}"
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: present
+    attributes:
+      - name: "disk.EnableUUID"
+        value: "TRUE"
+      - name: "guestinfo.ignition.config.data.encoding"
+        value: "base64"
+      - name: "guestinfo.ignition.config.data"
+        value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+  loop: "{{ bootstrap_nodes_list }}"
 
 - name: "clone from rhcos ova"
   vmware_guest:
@@ -23,23 +39,11 @@
       memory_reservation_lock: true
       memory_reservation: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"
-  loop: "{{ bootstrap_nodes_list }}"
-
-- name: "add custom attributes to rhcos ova"
-  vmware_guest_custom_attributes:
-    hostname: "{{ openshift_vcenter.host }}"
-    username: "{{ openshift_vcenter.username }}"
-    password: "{{ openshift_vcenter.password }}"
-    validate_certs: no
-    datacenter: "{{ openshift_vcenter.datacenter }}"
-    folder: "{{ openshift_vcenter.folder }}"
-    name: "{{ item }}"
-    state: present
-    attributes:
-      - name: "disk.EnableUUID"
+    customvalues:
+      - key: "disk.EnableUUID"
         value: "TRUE"
-      - name: "guestinfo.ignition.config.data.encoding"
+      - key: "guestinfo.ignition.config.data.encoding"
         value: "base64"
-      - name: "guestinfo.ignition.config.data"
+      - key: "guestinfo.ignition.config.data"
         value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
   loop: "{{ bootstrap_nodes_list }}"
