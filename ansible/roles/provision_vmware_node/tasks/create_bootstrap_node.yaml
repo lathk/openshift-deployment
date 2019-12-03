@@ -20,7 +20,7 @@
       size_gb: "{{ bootstrap_node.disk.size }}"
     hardware:
       memory: "{{ bootstrap_node.ram }}"
-      mem_reservation: "{{ bootstrap_node.ram }}"
+      memory_reservation_lock: true
       num_cpus: "{{ bootstrap_node.cpus }}"
   loop: "{{ bootstrap_nodes_list }}"
 

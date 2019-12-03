@@ -17,7 +17,7 @@
       size_gb: "{{ worker_node.disk.size }}"
     hardware:
       memory: "{{ worker_node.ram }}"
-      mem_reservation: "{{ worker_node.ram }}"
+      memory_reservation_lock: true
       num_cpus: "{{ worker_node.cpus }}"
     customvalues:
       - key: disk.EnableUUID
