@@ -19,7 +19,7 @@
       type: "{{ bootstrap_node.disk.type }}"
       size_gb: "{{ bootstrap_node.disk.size }}"
     hardware:
-      memory: "{{ bootstrap_node.ram }}"
+      memory_mb: "{{ bootstrap_node.ram }}"
       memory_reservation_lock: true
       memory_reservation: "{{ bootstrap_node.ram }}"
       num_cpus: "{{ bootstrap_node.cpus }}"

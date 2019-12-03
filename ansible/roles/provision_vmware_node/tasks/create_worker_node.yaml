@@ -16,7 +16,7 @@
       type: "{{ worker_node.disk.type }}"
       size_gb: "{{ worker_node.disk.size }}"
     hardware:
-      memory: "{{ worker_node.ram }}"
+      memory_mb: "{{ worker_node.ram }}"
       memory_reservation_lock: true
       memory_reservation: "{{ worker_node.ram }}"
       num_cpus: "{{ worker_node.cpus }}"
