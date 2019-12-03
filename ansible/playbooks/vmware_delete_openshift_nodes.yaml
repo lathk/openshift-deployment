@@ -1,0 +1,5 @@
+---
+- name: "Deprovisioning openshift nodes on VMware"
+  hosts: localhost
+  roles:
+    - deprovision_vmware_node

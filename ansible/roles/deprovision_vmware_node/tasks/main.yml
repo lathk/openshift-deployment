@@ -1,0 +1,4 @@
+---
+# tasks file for deprovision_vmware_node
+- include_tasks: "stop_nodes.yaml"
+- include_tasks: "delete_nodes.yaml"

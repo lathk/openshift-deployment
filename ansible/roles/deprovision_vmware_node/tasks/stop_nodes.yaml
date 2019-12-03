@@ -1,0 +1,11 @@
+---
+- name: "set the state node to powered-off"
+  vmware_guest_powerstate:
+    hostname: "{{ openshift_vcenter.host }}"
+    username: "{{ openshift_vcenter.username }}"
+    password: "{{ openshift_vcenter.password }}"
+    validate_certs: no
+    folder: "{{ openshift_vcenter.folder }}"
+    name: "{{ item }}"
+    state: "powered-off"
+  loop: "{{ bootstrap_nodes_list + master_nodes_list + worker_nodes_list}}"
