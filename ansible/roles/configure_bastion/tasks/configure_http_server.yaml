@@ -16,7 +16,8 @@
     owner: "{{ http_server_user }}"
     group: "{{ http_server_group }}"
     recurse: true
-
+  tags: test
+  
 - name: "allow http on firewalld"
   firewalld:
     service: "{{ item }}"
