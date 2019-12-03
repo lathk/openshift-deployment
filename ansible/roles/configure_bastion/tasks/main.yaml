@@ -10,3 +10,4 @@
 - include_tasks: "configure_http_server.yaml"
   tags: test
 - include_tasks: "create_openshift_install_config_files.yaml"
+  tags: test
