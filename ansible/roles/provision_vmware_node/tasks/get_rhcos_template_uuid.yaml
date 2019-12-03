@@ -14,7 +14,7 @@
     vm_template_folder: "{{ r_template_folder.folders | select('search', openshift_vcenter.datacenter) | first }}"
 
 - name: get vm template facts
-  vmware_guest_info:
+  vmware_guest_facts:
     hostname: "{{ openshift_vcenter.host }}"
     username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"
