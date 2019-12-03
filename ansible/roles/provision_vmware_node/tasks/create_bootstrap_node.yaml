@@ -47,4 +47,4 @@
         value: "base64"
       - name: "guestinfo.ignition.config.data"
         value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
-  loop: "{{ master_nodes_list }}"
+  loop: "{{ bootstrap_nodes_list }}"
