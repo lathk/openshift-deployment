@@ -8,7 +8,6 @@
     datacenter: "{{ openshift_vcenter.datacenter }}"
     folder: "{{ openshift_vcenter.folder }}"
     cluster: "{{ openshift_vcenter.cluster }}"
-    template: "{{ openshift_rhcos_template_uuid }}"
     name: "{{ item }}"
     state: "absent"
   loop: "{{ bootstrap_nodes_list + master_nodes_list + worker_nodes_list}}"
