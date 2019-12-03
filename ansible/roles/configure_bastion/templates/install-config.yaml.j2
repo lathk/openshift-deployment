@@ -9,9 +9,11 @@ proxy:
 compute:
 - name: worker
   replicas: {{ openshift_worker_replicas_number }}
+  hyperthreading: Enabled
 controlPlane:
   name: master
   replicas: {{ openshift_master_replicas_number }}
+  hyperthreading: Enabled
 metadata:
   name: '{{ openshift_cluster_name }}'
 platform:

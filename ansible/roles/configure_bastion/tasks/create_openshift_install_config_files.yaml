@@ -10,12 +10,22 @@
     src: "{{ openshift_install_config_yaml_name }}.j2"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
   tags: test
-  
+
 - name: "backup install-config.yaml file"
   copy:
     src: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}.bak"
     remote_src: true
+
+- name: "create manifests"
+  shell:
+    cmd: "{{ _openshift_installer_cmd }} --dir {{ openshift_working_directory_path }} create manifests"
+  register: manifest_creation
+
+- name: "set mastersSchedulable to false for cluster scheduler"
+  template:
+    src: "{{ openshift_cluster_scheduler_manifest.filename }}.j2"
+    dest: "{{ openshift_working_directory_path }}/{{ openshift_manifests_dir_name }}/{{ openshift_cluster_scheduler_manifest.filename }}"
 
 - name: "create ignition config files"
   shell:

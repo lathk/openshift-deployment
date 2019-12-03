@@ -17,6 +17,7 @@
       size_gb: "{{ master_node.disk.size }}"
     hardware:
       memory: "{{ master_node.ram }}"
+      mem_reservation: "{{ master_node.ram }}"
       num_cpus: "{{ master_node.cpus }}"
 #    customvalues:
 #      - key: disk.EnableUUID
