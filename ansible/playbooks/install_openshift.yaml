@@ -1,12 +1,15 @@
 ---
 #TODO: fix for not use ansible_python_interpreter
-- name: "Install OpenShift"
+- name: "Configure basion"
   hosts: localhost
   roles:
     - role: configure_bastion
       vars:
         ansible_playbook_python: "{{ python_interpreter | default(omit) }}"
 
-    - provision_vmware_node
-
   environment: "{{ openshift_proxy | default(omit) }}"
+
+- name: "Provision VMware nodes"
+  hosts: localhost
+  roles:
+    - provision_vmware_node
