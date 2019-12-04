@@ -16,6 +16,9 @@
     r_macaddresses: "{{ r_macaddresses }} + {{ item.instance.hw_name }} -> {{ item.instance.hw_eth0.macaddress }}\n"
   loop: "{{ r_node_facts.results }}"
 
+- debug:
+    var: r_macaddresses
+
 #- debug:
 #    msg: "{{ item.instance.hw_name }} -> {{ item.instance.hw_eth0.macaddress }}"
 #  loop: "{{ r_node_facts.results }}"
