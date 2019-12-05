@@ -118,7 +118,7 @@ oc get csr --no-headers | awk '{print $1}' | xargs oc adm certificate approve
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}'
 ```
 
-  - for production envrionment:
+  - for production environment:
 
 ```shell
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
