@@ -13,14 +13,11 @@
   - on `VM Options`, expand `Advanced` and set `Latency Sensivity` to *HIGH*
 
   - next to `Configuration Parameters`, click on `Edit Configuration...` and add following parameters:
-    - `guestinfo.ignition.config.data`, set the value to `changeme`
+    - `guestinfo.ignition.config.data`, set the value to `CHANGEME`
     - `guestinfo.ignition.config.data.encoding`, set the value to `base64`
     - `disk.EnableUUID`, set this value to `TRUE`
 
-- clone the OVA template for bootstrap, master and worker nodes
-
-
-## Bastion VM configuration
+## Bastion server
 
 - create a VMware VM
 
@@ -28,200 +25,67 @@
 
 - configure proxy (to get access on Internet)
 
-- install tools
-
-```
-yum install -y tmux jq
-```
-
-- get OpenShift installer binary
+- install Ansible on this server
 
 ```shell
-OCP_VERSION=4.2.7
-wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCP_VERSION}/openshift-install-linux-${OCP_VERSION}.tar.gz
-tar zxvf openshift-install-linux-${OCP_VERSION}.tar.gz -C /usr/bin
-rm -f openshift-install-linux-${OCP_VERSION}.tar.gz /usr/bin/README.md
-chmod +x /usr/bin/openshift-install
+pip install ansible==2.8.7
 ```
 
-- get oc client
+**NB**: In the Ansible version 2.9, there is a bug in the module `vmware_guest` with the customvalues parameter.
+
+- install `pyvmomi` library
 
 ```shell
-wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCP_VERSION}/openshift-client-linux-${OCP_VERSION}.tar.gz
-tar zxvf openshift-client-linux-${OCP_VERSION}.tar.gz -C /usr/bin
-rm -f openshift-client-linux-${OCP_VERSION}.tar.gz /usr/bin/README.md
-chmod +x /usr/bin/oc
+pip install pyvmomi
 ```
 
-- add oc completion to bashrc
+## Using Ansible playbook
+
+- clone this git repository
 
 ```shell
-oc completion bash >/etc/bash_completion.d/openshift
+git clone https://github.com/bmangoen/openshift-hybrid-install.git
 ```
 
-- configure a HTTP server
+- create extra_vars file (you could use this [example](../extra_vars/example.yaml))
 
-The HTTP server will be used to provide bootstrap ignition configuration file
+- go to the `openshift-hybrid-install/ansible` directory and execute `install_openshift` playbook by also specified the extra_vars file
 
 ```shell
-yum install -y nginx
-systemctl start nginx
-mkdir /usr/share/nginx/html/ignition/
+cd openshift-hybrid-install/ansible && ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/example.yaml
 ```
 
-## Installation configuration files
+## Update the MAC addresses of nodes into DHCP server
 
-- create [cloud.openshift.com](https://cloud.openshift.com/) pull secret
+After the execution of the playbook, the MAC addresses of the cluster nodes will be displayed.
+You have to copy/paste them and update the DHCP server.
 
-- create ssh key
+## Poweron the nodes
+
+Execute `vmware_poweron_openshift_nodes` playbook
 
 ```shell
-ssh-keygen -f ~/.ssh/cluster-ocp-key -N ''
+ansible-playbook playbooks/vmware_poweron_openshift_nodes.yaml -e @extra_vars/example.yaml
 ```
 
-- create working installer directory
+From this stage, the bootstrap starts.
 
-```shell
-mkdir ocp-vsphere
-```
-
-- create `install-config.yaml` file in the working installer directory
-
-```yaml
-apiVersion: v1
-## The base domain of the cluster. All DNS records will be sub-domains of this base and will also include the cluster name.
-baseDomain: example.com
-## The proxy configuration (if it is necessary)
-proxy:
-  httpProxy: http://<username>:<pswd>@<ip>:<port>
-  httpsProxy: http://<username>:<pswd>@<ip>:<port>
-  noProxy: example.com
-compute:
-- name: worker
-  replicas: 0
-controlPlane:
-  name: master
-  replicas: 3
-metadata:
-  ## The name for the cluster
-  name: test
-platform:
-  vsphere:
-    ## The hostname or IP address of the vCenter
-    vcenter: your.vcenter.server
-    ## The name of the user for accessing the vCenter
-    username: your_vsphere_username
-    ## The password associated with the user
-    password: your_vsphere_password
-    ## The datacenter in the vCenter
-    datacenter: your_datacenter
-    ## The default datastore to use.
-    defaultDatastore: your_datastore
-## The pull secret that provides components in the cluster access to images for OpenShift components.
-pullSecret: ''
-## The default SSH key that will be programmed for `core` user.
-sshKey: ''
-```
-
-**NB**: the number of worker replicas is set to 0 because UPI does not perform creating and managing workers
-
-- generate kubernetes manifests
-
-```shell
-openshift-install --dir ocp-vsphere create manifests
-```
-
-- modify manifests (if necessary)
-
-If the manifest `manifests/cluster-scheduler-02-config.yml` exists:
-
- ```
- sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
- ```
-
-- generate ignition files
-
-```shell
-openshift-install --dir ocp-vsphere create ignition-configs
-```
-
-
-## RHCOS VM configuration with ignition files
-
-### Ignition files
-
-- create a append-bootstrap.ign file
-
-```json
-{
-  "ignition": {
-    "config": {
-      "append": [
-        {
-          "source": "http://<http_server_ip>/ignition/bootstrap.ign",
-          "verification": {}
-        }
-      ]
-    },
-    "timeouts": {},
-    "version": "2.1.0"
-  },
-  "networkd": {},
-  "passwd": {},
-  "storage": {},
-  "systemd": {}
-}
-```
-
-- encode ignition files to base64
-
-```shell
-for i in append-bootstrap master worker
-do
-base64 -w0 < $i.ign > $i.64
-done
-```
-
-- upload the bootstrap ignition file
-
-```shell
-scp bootstrap.ign root@<http_server_ip>:/usr/share/nginx/html/ignition/
-```
-
-### Create VMs
-
-On vSphere GUI,
-
-- right-click on the bootstrap template
-  - click on `New VM From this Template...`
-  - `Select a name and folder`
-  - `Select storage`
-  - on `Select clone options`, check `Customize this virtual machine’s hardware`
-    - on `Customize hardware`, modify the parameter `guestinfo.ignition.config.data` with the content of ignition file encoded on base64 (for example, `cat append-bootstrap.64`)
-
-- do it for the all of nodes of the cluster
-
-- boot all VMs
-
-
-## Creating the cluster
-
-The following tasks must have done from Bastion VM.
+## Cluster installation
 
 ### Monitor the bootsrap process
 
 ```shell
-openshift-install --dir ocp-vsphere wait-for bootstrap-complete --log-level debug
+openshift-install --dir working_installer_dir wait-for bootstrap-complete --log-level debug
 ```
 
-**NB**: The message `DEBUG Bootstrap status: complete`
+**NB**: The bootstrap is finished when there is the message `DEBUG Bootstrap status: complete`
 
 ### Login to the cluster
 
-- export `KUBECONFIG`
+- export `KUBECONFIG` to use `oc` client
 
-```
-export KUBECONFIG=<working_installer_dir>/auth/kubeconfig
+```shell
+export KUBECONFIG=working_installer_dir/auth/kubeconfig
 ```
 
 ### Approving CSRs
@@ -238,18 +102,26 @@ oc get nodes
 oc get csr
 ```
 
-- If the CSRs were not approved, after all of the pending CSRs for the machines you added are in *Pending* status, approve the CSRs for your cluster machines
+- if the CSRs were not approved, after all of the pending CSRs for the machines you added are in *Pending* status, approve the CSRs for your cluster machines
 
-```
-oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
+```shell
+oc get csr --no-headers | awk '{print $1}' | xargs oc adm certificate approve
 ```
 
 ### Image registry storage configuration
 
 - modify the storage specification of `configs.imageregistry.operator.openshift.io/cluster`
 
+  - for non-production environment, you can use non-persistent volume:
+
 ```shell
-oc edit configs.imageregistry.operator.openshift.io/cluster
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}'
+```
+
+  - for production envrionment:
+
+```shell
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
 ```
 
 Leave the `claim` filed blank to allow the automatic creation of an `image-registry-storage` PVC.

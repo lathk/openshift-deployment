@@ -16,11 +16,11 @@ ssh_key_name: "cluster-ocp-key"
 
 # HTTP server
 
-http_server_package_name: "nginx"
-http_server_service_name: "nginx"
-http_server_user: "nginx"
-http_server_group: "nginx"
-http_server_data_dir: "/usr/share/nginx/html"
+http_server_package_name: "httpd"
+http_server_service_name: "httpd"
+http_server_user: "apache"
+http_server_group: "apache"
+http_server_data_dir: "/var/www/html"
 http_server_ignition_files_dir_name: "ignition"
 
 # OpenShift install-config vars (should be replaced)

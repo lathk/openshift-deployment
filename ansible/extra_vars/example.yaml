@@ -7,6 +7,8 @@ openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 
+openshift_pull_secret: 'your_pull_secret'
+
 # OpenShift nodes list
 bootstrap_nodes_list:
   - "ocp-bootstrap"
@@ -23,16 +25,16 @@ worker_nodes_list:
 
 # vCenter variables
 openshift_vcenter:
-  hostname: "your.vcenter.server"
+  host: "your_vcenter_server"
   username: "your_vsphere_username"
   password: "your_vsphere_password"
   datacenter: "your_datacenter"
   cluster: "your_cluster"
   default_datastore: "your_datastore"
-  folder: "your_folder"
-  rhcos_template: "rhcos_template_name"
 
-# Proxy variables
+openshift_rhcos_template_name: "rhcos_template_name"
+
+# Proxy variables (if it is used)
 openshift_proxy:
   http: "http://proxy_server:9000"
   https: "http://proxy_server:9000"

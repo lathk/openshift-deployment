@@ -16,7 +16,6 @@
     owner: "{{ http_server_user }}"
     group: "{{ http_server_group }}"
     recurse: true
-  tags: test
 
 - name: "allow http on firewalld"
   firewalld:
@@ -24,6 +23,7 @@
     state: enabled
     permanent: "true"
   loop: "{{ firewall_service_rules }}"
+  notify: reload_firewalld
 
 - name: "allow port on firewalld"
   firewalld:
@@ -31,3 +31,4 @@
     state: enabled
     permanent: "true"
   loop: "{{ firewall_port_rules }}"
+  notify: reload_firewalld

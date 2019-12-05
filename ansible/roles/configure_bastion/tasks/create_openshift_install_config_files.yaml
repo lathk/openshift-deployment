@@ -3,19 +3,23 @@
   file:
     path: "{{ openshift_working_directory_path }}"
     state: directory
-  tags: test
+  tags:
+    - install_config
 
 - name: "copy install-config.yaml"
   template:
     src: "{{ openshift_install_config_yaml_name }}.j2"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
-  tags: test
+  tags:
+    - install_config
 
 - name: "backup install-config.yaml file"
   copy:
     src: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_install_config_yaml_name }}.bak"
     remote_src: true
+  tags:
+    - install_config
 
 - name: "create manifests"
   shell:

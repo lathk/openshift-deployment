@@ -9,12 +9,10 @@ This repo is used for the installation of the OpenShift Container Platform 4 bas
 - NTP Server
 - HAProxy Server
 
-## Use case
-
 ## Documentation
 
-[Manuel Installation VMware part](./doc/vmware.md)
+- [OpenShift installation on VMware](./doc/vmware.md)
 
-[Ansible Provisionning](./doc/OCPDeploymentViaAnsible.md)
+- [Ansible Provisionning](./doc/OCPDeploymentViaAnsible.md)
 
 [Adding BareMetal Server](./doc/AddBMWorker.md)

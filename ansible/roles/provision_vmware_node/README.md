@@ -12,7 +12,13 @@ Role that provision VMware nodes.
 
 ## Role Variables
 
+### Required extra variable
+
+- `openshift_cluster_name`: OpenShift cluster name
+
 ### Default vars
+
+- `openshift_working_directory_name`: OpenShift installer working directory
 
 - `ignition_files_path`: Absolute path of ignition files directory
 

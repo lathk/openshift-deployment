@@ -3,6 +3,8 @@
   stat:
     path: "{{ openshift_binary_dir }}/{{ openshift_installer_binary_name }}"
   register: r_oc_client_bin
+  tags:
+    - install_config
 
 - name: "get oc client"
   unarchive:
@@ -11,6 +13,10 @@
     mode: "{{ openshift_oc_client_binary_mode }}"
     remote_src: "true"
   when: not r_oc_client_bin.stat.exists
+  tags:
+    - install_config
 
 - name: "enable oc auto-completion"
   shell: "{{ _openshift_oc_client_cmd }} completion bash >/etc/bash_completion.d/openshift"
+  tags:
+    - install_config
