@@ -1,6 +1,6 @@
 # openshift-hybrid-install
 
-This repo is used for the installation of the OpenShift Container Platform 4 based on OVA template from Red Hat for Master+Infra nodes and HPE Synergy BareMetal Servers for Workers.
+Installation of the OpenShift Container Platform 4 on VMware infrastructure for the `master` and `infra` nodes and HPE Synergy BareMetal servers for `compute`.
 
 ## Pre-requisites
 
@@ -13,6 +13,4 @@ This repo is used for the installation of the OpenShift Container Platform 4 bas
 
 - [OpenShift installation on VMware](./doc/vmware.md)
 
-- [Ansible Provisionning](./doc/OCPDeploymentViaAnsible.md)
-
-[Adding BareMetal Server](./doc/AddBMWorker.md)
+- [Adding BareMetal Server](./doc/AddBMWorker.md)
