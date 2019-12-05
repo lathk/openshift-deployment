@@ -115,7 +115,7 @@ oc get csr --no-headers | awk '{print $1}' | xargs oc adm certificate approve
   - for non-production environment, you can use non-persistent volume:
 
 ```shell
-oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}}'
 ```
 
   - for production environment:
