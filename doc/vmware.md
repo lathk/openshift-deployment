@@ -78,7 +78,7 @@ From this stage, the bootstrap starts.
 openshift-install --dir working_installer_dir wait-for bootstrap-complete --log-level debug
 ```
 
-**NB**: The bootstrap is finished when there is the message `DEBUG Bootstrap status: complete`
+**NB**: The bootstrap is finished when there is the message `DEBUG Bootstrap status: complete`. You can safely delete the bootstrap node at this step.
 
 ### Login to the cluster
 
@@ -133,6 +133,8 @@ oc get clusteroperator image-registry
 ```
 
 ### Completing installation
+
+Check the status of the cluster installation.
 
 ```shell
 openshift-install --dir ocp-vsphere wait-for install-complete
