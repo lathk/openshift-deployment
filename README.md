@@ -1,8 +1,6 @@
 # openshift-hybrid-install
 
-This repo is used for the installation of the OCP cluster based on OVA template from Red Hat for Master+Infra nodes and HPE Synergy BareMetal Servers for Workers.
-
-
+This repo is used for the installation of the OpenShift Container Platform 4 based on OVA template from Red Hat for Master+Infra nodes and HPE Synergy BareMetal Servers for Workers.
 
 ## Pre-requisites
 

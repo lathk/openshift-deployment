@@ -1,38 +1,90 @@
-Role Name
-=========
+# provision_vmware_node
 
-A brief description of the role goes here.
+Role that provision VMware nodes.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- PyVmomi library for using VMware modules
 
-Role Variables
---------------
+- [Red Hat CoreOS OVA](https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-vmware.ova) available at vCenter
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- Ignition configuration files still generated
 
-Dependencies
-------------
+## Role Variables
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+### Default vars
 
-Example Playbook
-----------------
+- `ignition_files_path`: Absolute path of ignition files directory
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+### RH CoreOS
 
-License
--------
+- `openshift_rhcos_template_name`: Red Hat CoreOS template name imported into VMware vCenter
+
+### List of nodes
+
+All the nodes are ordered into different lists by type of OpenShift node. An element of these lists is the hostname of the node.
+
+- `bootstrap_nodes_list`: list of bootstrap node (should contain one element)
+- `master_nodes_list`: list of master nodes
+- `worker_nodes_list`: list of worker nodes
+
+### Node vm configuration
+
+Each type of node has its VM configuration.
+
+- `bootstrap_node`
+
+```yaml
+bootstrap_node:
+  name: "ocp-bootstrap_node"
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.64"
+```
+
+- `master_node`
+
+```yaml
+master_node:
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/master.64"
+```
+
+- `worker_node`
+
+```yaml
+worker_node:
+  ram: "16384"
+  cpus: "4"
+  disk:
+    size: "120"
+    type: "thin"
+  ignition_file_path: "{{ ignition_files_path }}/worker.64"
+```
+
+## Dependencies
+
+N/A
+
+## Example Playbook
+
+```yaml
+- hosts: localhost
+  roles:
+    - provision_vmware_node
+```
+
+## License
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
