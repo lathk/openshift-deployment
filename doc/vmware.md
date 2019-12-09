@@ -6,9 +6,9 @@
 
 - create new folder with the name of the OCP cluster
 
-- import OVA in vSphere
+- import OVA in vSphere (make sure the imported OVA is a VMware template)
 
-- edit OVA template settings
+- edit the template settings
 
   - on `VM Options`, expand `Advanced` and set `Latency Sensivity` to *HIGH*
 
@@ -28,7 +28,7 @@
 - install Ansible on this server
 
 ```shell
-pip install ansible==2.8.7
+pip install ansible
 ```
 
 **NB**: In the Ansible version 2.9, there is a bug in the module `vmware_guest` with the customvalues parameter.
@@ -115,14 +115,15 @@ oc get csr --no-headers | awk '{print $1}' | xargs oc adm certificate approve
   - for non-production environment, you can use non-persistent volume:
 
 ```shell
-oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
 ```
 
   - for production environment:
 
 ```shell
-oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"pvc":{"claim":}}}'
 ```
+
 
 Leave the `claim` filed blank to allow the automatic creation of an `image-registry-storage` PVC.
 
