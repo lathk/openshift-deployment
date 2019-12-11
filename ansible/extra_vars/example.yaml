@@ -14,7 +14,7 @@ openshift_rhcos_template_name: "rhcos_template_name"
 ## OpenShift network variables (for customization)
 
 openshift_networking:
-  pod_cidr: "10.124.0.0/14"
+  pod_cidr: "10.128.0.0/14"
   host_prefix: "23"
   type: "OpenShiftSDN"
   service_cidr: "172.30.0.0/16"
