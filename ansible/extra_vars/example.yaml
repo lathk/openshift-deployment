@@ -11,6 +11,14 @@ openshift_pull_secret: 'your_pull_secret'
 
 openshift_rhcos_template_name: "rhcos_template_name"
 
+## OpenShift network variables (for customization)
+
+openshift_networking:
+  pod_cidr: "10.124.0.0/14"
+  host_prefix: "/23"
+  type: "OpenShiftSDN"
+  service_cidr: "172.30.0.0/16"
+
 # OpenShift nodes list
 bootstrap_nodes_list:
   - "ocpbootstrap"
