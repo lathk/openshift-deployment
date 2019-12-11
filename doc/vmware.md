@@ -8,15 +8,6 @@
 
 - import OVA in vSphere (make sure the imported OVA is a VMware template)
 
-- edit the template settings
-
-  - on `VM Options`, expand `Advanced` and set `Latency Sensivity` to *HIGH*
-
-  - next to `Configuration Parameters`, click on `Edit Configuration...` and add following parameters:
-    - `guestinfo.ignition.config.data`, set the value to `CHANGEME`
-    - `guestinfo.ignition.config.data.encoding`, set the value to `base64`
-    - `disk.EnableUUID`, set this value to `TRUE`
-
 ## Bastion server
 
 - create a VMware VM
@@ -38,6 +29,10 @@ pip install ansible
 ```shell
 pip install pyvmomi
 ```
+
+## Automation workflow
+
+![alt text][./images/ocp4_-_automation_workflow.png]
 
 ## Using Ansible playbook
 
