@@ -1,8 +1,7 @@
 ---
 # defaults file for configure_bastion
 
-tools_packages:
-  - tmux
+# Firewalld rules
 
 firewall_service_rules:
   - http
@@ -11,6 +10,8 @@ firewall_service_rules:
 firewall_port_rules:
   - "6443/tcp"
   - "22643/tcp"
+
+# SSH key
 
 ssh_key_name: "cluster-ocp-key"
 
@@ -23,7 +24,9 @@ http_server_group: "apache"
 http_server_data_dir: "/var/www/html"
 http_server_ignition_files_dir_name: "ignition"
 
-# OpenShift install-config vars (should be replaced)
+# OpenShift
+
+## OpenShift general vars (should be replaced)
 
 openshift_version: "4.2.7"
 openshift_cluster_name: "ocp-cluster"
@@ -32,17 +35,7 @@ openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 
-# vCenter variables
-openshift_vcenter:
-  host: "your_vcenter_server"
-  username: "your_vsphere_username"
-  password: "your_vsphere_password"
-  datacenter: "your_datacenter"
-  cluster: "your_cluster"
-  default_datastore: "your_datastore"
-  folder: "your_folder"
-
-# general OpenShift vars
+## OpenShift installer
 
 openshift_binary_dir: "/usr/bin"
 openshift_working_directory_name: "{{ openshift_cluster_name }}"
@@ -61,13 +54,14 @@ _openshift_oc_client_cmd: "{{ openshift_binary_dir }}/{{ openshift_oc_client_bin
 
 openshift_install_config_yaml_name: "install-config.yaml"
 
-# OpenShift manifests vars
+## OpenShift manifests
+
 openshift_manifests_dir_name: "manifests"
 openshift_cluster_scheduler_manifest:
   filename: "cluster-scheduler-02-config.yml"
   value: "false"
 
-# OpenShift ignition config files vars
+## OpenShift ignition config files
 
 openshift_append_bootstrap_ign_name: "append-bootstrap.ign"
 openshift_ignition_config_files_root_names:
