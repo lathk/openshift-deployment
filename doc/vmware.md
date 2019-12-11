@@ -32,7 +32,7 @@ pip install pyvmomi
 
 ## Automation workflow
 
-![alt text][./images/ocp4_-_automation_workflow.png]
+![alt text](./images/ocp4_-_automation_workflow.png "Automation workflow")
 
 ## Using Ansible playbook
 
