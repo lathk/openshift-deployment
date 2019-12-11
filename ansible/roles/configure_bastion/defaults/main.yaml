@@ -32,13 +32,15 @@ openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 
+# vCenter variables
 openshift_vcenter:
   host: "your_vcenter_server"
   username: "your_vsphere_username"
   password: "your_vsphere_password"
   datacenter: "your_datacenter"
+  cluster: "your_cluster"
   default_datastore: "your_datastore"
-  rhcos_template: "rhcos_template_name"
+  folder: "your_folder"
 
 # general OpenShift vars
 
