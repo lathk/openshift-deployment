@@ -16,12 +16,16 @@ controlPlane:
   hyperthreading: Enabled
 metadata:
   name: '{{ openshift_cluster_name }}'
+{% if openshift_networking is defined %}
+networking:
+  clusterNetwork:
+  - cidr: {{ openshift_networking.pod_cidr }}
+    hostPrefix: {{ openshift_networking.host_prefix }}
+  networkType: {{ openshift_networking.type }}
+  serviceNetwork:
+  - {{ openshift_networking.service_cidr }}
+{% endif %}
 platform:
-  vsphere:
-    vcenter: '{{ openshift_vcenter.host }}'
-    username: '{{ openshift_vcenter.username }}'
-    password: '{{ openshift_vcenter.password }}'
-    datacenter: '{{ openshift_vcenter.datacenter }}'
-    defaultDatastore: '{{ openshift_vcenter.default_datastore }}'
+  none: {}
 pullSecret: '{{ openshift_pull_secret | default('') }}'
 sshKey: '{{ ssh_key }}'

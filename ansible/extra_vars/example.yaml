@@ -1,7 +1,7 @@
 ---
 # OpenShift variables
 openshift_version: "4.2.7"
-openshift_cluster_name: "ocp-cluster"
+openshift_cluster_name: "ocpcluster"
 
 openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
@@ -10,6 +10,14 @@ openshift_master_replicas_number: "3"
 openshift_pull_secret: 'your_pull_secret'
 
 openshift_rhcos_template_name: "rhcos_template_name"
+
+## OpenShift network variables (for customization)
+
+openshift_networking:
+  pod_cidr: "10.124.0.0/14"
+  host_prefix: "23"
+  type: "OpenShiftSDN"
+  service_cidr: "172.30.0.0/16"
 
 # OpenShift nodes list
 bootstrap_nodes_list:
@@ -39,4 +47,4 @@ openshift_vcenter:
 openshift_proxy:
   http: "http://proxy_server:9000"
   https: "http://proxy_server:9000"
-  no_proxy: "localhost,.example.com"
+  no_proxy: "localhost,.{{ openshift_base_domain }}"
