@@ -22,8 +22,6 @@
 pip install ansible
 ```
 
-**NB**: In the Ansible version 2.9, there is a bug in the module `vmware_guest` with the customvalues parameter.
-
 - install `pyvmomi` library
 
 ```shell
@@ -32,7 +30,11 @@ pip install pyvmomi
 
 ## Automation workflow
 
+[Here](./images/ocp4_-_automation_workflow.png) is the complete workflow to install OpenShift 4 on VMware infrastructure.
+
 ![alt text](./images/ocp4_-_automation_workflow.png "Automation workflow")
+
+**NB**: All steps are automated with Ansible. Only the task `update MAC addresses on DHCP server` must be done manually.
 
 ## Using Ansible playbook
 
@@ -42,12 +44,22 @@ pip install pyvmomi
 git clone https://github.com/bmangoen/openshift-hybrid-install.git
 ```
 
-- create extra_vars file (you could use this [example](../extra_vars/example.yaml))
-
-- go to the `openshift-hybrid-install/ansible` directory and execute `install_openshift` playbook by also specified the extra_vars file
+- go to the `openshift-hybrid-install/ansible` directory and create extra_vars file (you could use this [example](../extra_vars/example.yaml))
 
 ```shell
-cd openshift-hybrid-install/ansible && ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/example.yaml
+cd openshift-hybrid-install/ansible && cp extra_vars/example.yaml extra_vars/ocp_install.yaml
+```
+
+- replace with the right values into this copied `extra_vars/ocp_install.yaml` file
+
+```shell
+vi extra_vars/ocp_install.yaml
+```
+
+- and execute `install_openshift` playbook by also specified the extra_vars file
+
+```shell
+ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/ocp_install.yaml
 ```
 
 ## Update the MAC addresses of nodes into DHCP server
@@ -133,5 +145,5 @@ oc get clusteroperator image-registry
 Check the status of the cluster installation.
 
 ```shell
-openshift-install --dir ocp-vsphere wait-for install-complete
+openshift-install --dir ocp-vsphere wait-for install-complete --log-level debug
 ```
