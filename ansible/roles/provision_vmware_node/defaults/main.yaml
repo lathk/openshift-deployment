@@ -1,20 +1,35 @@
 ---
 # defaults file for provision_vmware_node
 
-openshift_rhcos_template_name: "rhcos"
-openshift_rhcos_template_custom_attributes:
-  - name: "disk.EnableUUID"
-    value: "TRUE"
-  - name: "guestinfo.ignition.config.data.encoding"
-    value: "base64"
-  - name: "guestinfo.ignition.config.data"
-    value: "CHANGEME"
-#    value: "{{ lookup('file', bootstrap_node.ignition_file_path) }}"
+openshift_rhcos_template_name: "rhcos-4.2.0-x86_64-template"
 
+openshift_working_directory_name: "{{ openshift_cluster_name }}"
 ignition_files_path: "{{ ansible_env.HOME }}/{{ openshift_working_directory_name }}"
+
+openshift_common_config_params:
+  - key: "sched.cpu.latencySensitivity"
+    value: "high"
+  - key: "disk.EnableUUID"
+    value: "TRUE"
+  - key: "guestinfo.ignition.config.data.encoding"
+    value: "base64"
+
+# OpenShift nodes lists
 
 bootstrap_nodes_list:
   - "ocp-bootstrap"
+
+master_nodes_list:
+  - "ocp-master1"
+  - "ocp-master2"
+  - "ocp-master3"
+
+worker_nodes_list:
+  - "ocp-worker1"
+  - "ocp-worker2"
+  - "ocp-worker3"
+
+# OpenShift node VM configurations
 
 bootstrap_node:
   name: "ocp-bootstrap_node"
@@ -25,11 +40,6 @@ bootstrap_node:
     type: "thin"
   ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.64"
 
-master_nodes_list:
-  - "ocp-master1"
-  - "ocp-master2"
-  - "ocp-master3"
-
 master_node:
   ram: "16384"
   cpus: "4"
@@ -37,11 +47,6 @@ master_node:
     size: "120"
     type: "thin"
   ignition_file_path: "{{ ignition_files_path }}/master.64"
-
-worker_nodes_list:
-  - "ocp-worker1"
-  - "ocp-worker2"
-  - "ocp-worker3"
 
 worker_node:
   ram: "16384"

@@ -1,39 +1,50 @@
 ---
 # OpenShift variables
 openshift_version: "4.2.7"
-openshift_cluster_name: "ocp-cluster"
+openshift_cluster_name: "ocpcluster"
 
 openshift_base_domain: "example.com"
 openshift_worker_replicas_number: "0"
 openshift_master_replicas_number: "3"
 
+openshift_pull_secret: 'your_pull_secret'
+
+openshift_rhcos_template_name: "rhcos_template_name"
+
+## OpenShift network variables (for customization)
+
+openshift_networking:
+  pod_cidr: "10.128.0.0/14"
+  host_prefix: "23"
+  type: "OpenShiftSDN"
+  service_cidr: "172.30.0.0/16"
+
 # OpenShift nodes list
 bootstrap_nodes_list:
-  - "ocp-bootstrap"
+  - "ocpbootstrap"
 
 master_nodes_list:
-  - "ocp-master1"
-  - "ocp-master2"
-  - "ocp-master3"
+  - "ocpmaster1"
+  - "ocpmaster2"
+  - "ocpmaster3"
 
 worker_nodes_list:
-  - "ocp-worker1"
-  - "ocp-worker2"
-  - "ocp-worker3"
+  - "ocpworker1"
+  - "ocpworker2"
+  - "ocpworker3"
 
 # vCenter variables
 openshift_vcenter:
-  hostname: "your.vcenter.server"
+  host: "your_vcenter_server"
   username: "your_vsphere_username"
   password: "your_vsphere_password"
   datacenter: "your_datacenter"
   cluster: "your_cluster"
   default_datastore: "your_datastore"
   folder: "your_folder"
-  rhcos_template: "rhcos_template_name"
 
-# Proxy variables
+# Proxy variables (if it is used)
 openshift_proxy:
   http: "http://proxy_server:9000"
   https: "http://proxy_server:9000"
-  no_proxy: "localhost"
+  no_proxy: "localhost,.{{ openshift_base_domain }}"

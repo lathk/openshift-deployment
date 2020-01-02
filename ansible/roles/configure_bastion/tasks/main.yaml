@@ -1,11 +1,16 @@
 ---
 # tasks file for configure_bastion
 
-- include_tasks: "install_tools.yaml"
-  tags: test
+- include_tasks: "generate_ssh_key.yaml"
+  tags:
+    - install_config
 - include_tasks: "get_openshift_binary.yaml"
+  tags:
+    - install_config
 - include_tasks: "install_oc_client.yaml"
+  tags:
+    - install_config
 - include_tasks: "configure_http_server.yaml"
-  tags: test
 - include_tasks: "create_openshift_install_config_files.yaml"
-  tags: test
+  tags:
+    - install_config
