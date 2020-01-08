@@ -72,7 +72,7 @@ You have to copy/paste them and update the DHCP server.
 Execute `vmware_poweron_openshift_nodes` playbook
 
 ```shell
-ansible-playbook playbooks/vmware_poweron_openshift_nodes.yaml -e @extra_vars/example.yaml
+ansible-playbook playbooks/vmware_poweron_openshift_nodes.yaml -e @extra_vars/ocp_install.yaml
 ```
 
 From this stage, the bootstrap starts.
