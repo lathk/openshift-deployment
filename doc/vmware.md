@@ -44,7 +44,7 @@ pip install pyvmomi
 git clone https://github.com/bmangoen/openshift-hybrid-install.git
 ```
 
-- go to the `openshift-hybrid-install/ansible` directory and create extra_vars file (you could use this [example](../extra_vars/example.yaml))
+- go to the `openshift-hybrid-install/ansible` directory and create extra_vars file (you could use this [example](../ansible/extra_vars/example.yaml))
 
 ```shell
 cd openshift-hybrid-install/ansible && cp extra_vars/example.yaml extra_vars/ocp_install.yaml
