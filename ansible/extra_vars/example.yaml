@@ -1,6 +1,9 @@
 ---
+# Environement Variable
+ansible_python_interpreter: '/usr/bin/python3'
+
 # OpenShift variables
-openshift_version: "4.2.7"
+openshift_version: "4.9.35"
 openshift_cluster_name: "ocpcluster"
 
 openshift_base_domain: "example.com"

@@ -5,7 +5,7 @@
   roles:
     - role: configure_bastion
       vars:
-        ansible_python_interpreter: "{{ python_interpreter | default(ansible_facts.ansible_python.executable) }}"
+        ansible_python_interpreter: "{{ python_interpreter | default(None) }}"
 
   environment: "{{ openshift_proxy | default(omit) }}"
 

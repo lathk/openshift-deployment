@@ -59,7 +59,7 @@ vi extra_vars/ocp_install.yaml
 - and execute `install_openshift` playbook by also specified the extra_vars file
 
 ```shell
-ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/ocp_install.yaml
+ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/ocp_install.yaml -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
 ## Update the MAC addresses of nodes into DHCP server
