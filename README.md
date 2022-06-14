@@ -11,6 +11,8 @@ Installation of the OpenShift Container Platform 4 on VMware infrastructure for 
 
 ## Documentation
 
+- [OpenShift installation via ansible](./doc/OCPDeploymentViaAnsible.md)
+
 - [OpenShift installation on VMware](./doc/vmware.md)
 
 - [Adding BareMetal Server](./doc/AddBMWorker.md)
