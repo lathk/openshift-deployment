@@ -1,10 +1,22 @@
-# OCP 4 install on VMware
+# OCP 4 install on VMware from ansible playbook
+
+
+
 
 ## Playbook Description
 3 playbooks :
  - configure_bastion.yaml : Setup the Bastion node
  - create_openshift_nodes.yaml : to provisionng the infrastructure on vmware
  - installation_openshift.yaml : to install Openshift
+
+### ssh configuration
+before run the playbook, create the ssh key 
+
+```shell
+ssh-keygen
+ssh-copy-id localhost
+```
+
 
 ### Configure variables
 update the extra_vars in ansible/extra_vars/example.yaml
