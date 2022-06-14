@@ -16,10 +16,24 @@ before run the playbook, create the ssh key
 ssh-keygen
 ssh-copy-id localhost
 ```
+need to install ansible also
 
+```shell
+subscription-manager repos --enable ansible-2.9-for-rhel-8-x86_64-rpms
+yum install -y ansible
+```
 
-### Configure variables
-update the extra_vars in ansible/extra_vars/example.yaml
+- install `pyvmomi` library
+
+```shell
+pip3 install pyvmomi
+```
+
+- install `git` 
+
+```shell
+yum install git -y
+```
 
 ### Setup the Bastion node
 Clone the repo && change the repository : 
@@ -27,6 +41,8 @@ Clone the repo && change the repository :
 git clone https://github.com/NicolasO/openshift-hybrid-install.git
 cd openshift-hybrid-install/ansible && cp extra_vars/example.yaml extra_vars/ocp_install.yaml
 ```
+
+update the extra_vars in ansible/extra_vars/example.yaml
 
 - replace with the right values into this copied `extra_vars/ocp_install.yaml` file
 
@@ -40,6 +56,11 @@ configure_bastion.yaml
 
 ```shell
 ansible-playbook playbooks/configure_bastion.yaml -e @extra_vars/ocp_install.yaml -e 'ansible_python_interpreter=/usr/bin/python3'
+```
+or provision up to the VMs: 
+
+```shell
+ansible-playbook playbooks/install_openshift.yaml -e @extra_vars/cic.yaml
 ```
 
 
