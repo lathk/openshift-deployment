@@ -25,7 +25,7 @@ pip install ansible
 - install `pyvmomi` library
 
 ```shell
-pip install pyvmomi
+pip3 install pyvmomi
 ```
 
 ## Automation workflow
