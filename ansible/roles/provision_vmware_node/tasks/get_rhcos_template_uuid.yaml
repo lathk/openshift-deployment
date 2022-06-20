@@ -6,7 +6,7 @@
     password: "{{ openshift_vcenter.password }}"
     validate_certs: no
     datacenter: "{{ openshift_vcenter.datacenter }}"
-    name: "{{ q }}"
+    name: "{{ openshift_rhcos_template_name }}"
   register: r_template_folder
 
 - name: set fact vm_template_folder
