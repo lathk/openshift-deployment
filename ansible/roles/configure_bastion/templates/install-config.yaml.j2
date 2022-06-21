@@ -27,5 +27,6 @@ networking:
 {% endif %}
 platform:
   none: {}
+fips: false
 pullSecret: '{{ openshift_pull_secret | default('') }}'
 sshKey: '{{ ssh_key }}'
