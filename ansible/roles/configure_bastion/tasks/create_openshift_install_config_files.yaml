@@ -38,8 +38,8 @@
 
 - name: "create append-bootstrap ignition file"
   template:
-    src: "{{ openshift_append_bootstrap_ign_name }}.j2"
-    dest: "{{ openshift_working_directory_path }}/{{ openshift_append_bootstrap_ign_name }}"
+    src: "{{ openshift_merge_bootstrap_ign_name }}.j2"
+    dest: "{{ openshift_working_directory_path }}/{{ openshift_merge_bootstrap_ign_name }}"
 
 - name: "encode ignition files into base64"
   shell:
