@@ -63,7 +63,7 @@ openshift_cluster_scheduler_manifest:
 
 ## OpenShift ignition config files
 
-openshift_append_bootstrap_ign_name: "append-bootstrap.ign"
+openshift_append_bootstrap_ign_name: "merge-bootstrap.ign"
 openshift_ignition_config_files_root_names:
   - "master"
   - "worker"
