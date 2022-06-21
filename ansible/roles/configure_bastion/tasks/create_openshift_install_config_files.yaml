@@ -36,7 +36,7 @@
     cmd: "{{ _openshift_installer_cmd }} --dir {{ openshift_working_directory_path }} create ignition-configs"
   register: ignition_creation
 
-- name: "create append-bootstrap ignition file"
+- name: "create merge-bootstrap ignition file"
   template:
     src: "{{ openshift_merge_bootstrap_ign_name }}.j2"
     dest: "{{ openshift_working_directory_path }}/{{ openshift_merge_bootstrap_ign_name }}"
