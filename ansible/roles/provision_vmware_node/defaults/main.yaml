@@ -38,7 +38,7 @@ bootstrap_node:
   disk:
     size: "120"
     type: "thin"
-  ignition_file_path: "{{ ignition_files_path }}/append-bootstrap.64"
+  ignition_file_path: "{{ ignition_files_path }}/merge-bootstrap.64"
 
 master_node:
   ram: "16384"
