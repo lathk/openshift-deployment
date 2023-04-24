@@ -5,7 +5,7 @@
     username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"
     validate_certs: no
-    datacenter: "{{ openshift_vcenter.datacenter }}"
+    #datacenter: "{{ openshift_vcenter.datacenter }}"
     name: "{{ openshift_rhcos_template_name }}"
   register: r_template_folder
 
@@ -14,7 +14,7 @@
     vm_template_folder: "{{ r_template_folder.folders | select('search', openshift_vcenter.datacenter) | first }}"
 
 - name: get vm template facts
-  vmware_guest_facts:
+  community.vmware.vmware_guest_info:
     hostname: "{{ openshift_vcenter.host }}"
     username: "{{ openshift_vcenter.username }}"
     password: "{{ openshift_vcenter.password }}"

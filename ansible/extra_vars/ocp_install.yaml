@@ -1,0 +1,54 @@
+---
+# Environement Variable
+ansible_python_interpreter: '/usr/bin/python3'
+
+# OpenShift variables
+openshift_version: "4.9.35"
+openshift_cluster_name: "ocp-cluster"
+
+openshift_base_domain: "bgl1.global.tslabs.hpecorp.net"
+openshift_worker_replicas_number: "0"
+openshift_master_replicas_number: "3"
+
+openshift_pull_secret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfM2JiZjFlZDIxZDY4NDhhOTllYzQ5ZTcxMDc1ODU5ZTg6WEUxWU9JRTdKSjBORFJNTERGUVhEUVVYTFZUTzZRMkNRUzdMUUoyM0lDMUxPUEVDWUFKUEE0MzJXQVkyTjhJUQ==","email":"gms.caas@hpe.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfM2JiZjFlZDIxZDY4NDhhOTllYzQ5ZTcxMDc1ODU5ZTg6WEUxWU9JRTdKSjBORFJNTERGUVhEUVVYTFZUTzZRMkNRUzdMUUoyM0lDMUxPUEVDWUFKUEE0MzJXQVkyTjhJUQ==","email":"gms.caas@hpe.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLWFiNDY1MTk3LWU3ZTMtNDFmOS1hMzA1LTVjNDI0MzZmNDM2ZjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNVGM1WkRSbVl6WXpNekUwWVRrNU9HRmxaVGxtT1RVM1pHWTVaVEUxTXlKOS5aUnN6NExWdmQ5VkpicGp0NjBoaDdUeUVCbTN5R3RLWEpwQTR5QW03QzZMZl91TzhKMUtxeEV5YUF0UzdlVkdLVDhKUkpldjlhN3R0THhTWDZPSjJIWFlqYkVXMEVmTE1ib244ME1ZajJ5c1JyY2Q3SE5STWU4TE5Ra082OWNtdTFkbDlrLXFkb3B2blBZc29lckdvbDNlODZLM09zamNHLTNDRjVUeDJGN2pQMkh5cmJUcnNJUk1kVUctVzJBNEZkT2poOVZiVnBiWjNUM0p0ODh3ZVIxeUQyRGF6ellVZ3JJZlhCYktHWHd5WTVaSl81WjJWQ183aDlfWnVMRWlLdW1neEdYeDVsVzhDb09JSThiWnZMNVhBQ192VUxkMGQ1NDV3NWdWN3M4bG84THpQOGc4UUR3Y2JnQnI5OEFXbF9GNWtrN2VJNVJUNUFiS04tTEZNRGlZU0d1cHhIbmlnT0pQVzlreGhJV19GTVdJeW9STi0zak1FaHlQaVoxeFVYbVlvbWhKVGM0ZXdzZzdJblFtUlJ3anl1RmxVVFhDeEhKTTJ6R3RPbWxvc0xvUFpuLUN4eTR2Y3ExdUhYSWcwWW9JRlFBYl9tZ1B2bk1QODZ4Nkd2eXdyOHRfanJRX0xKVzluYTJMRkxJSlVHSVJXWEtVcmtXdDVLd1NQbVlZWXpZSVZNUmF0WV9EUkJQZjNQZGRqUlNPRHdBcHpnRnU3T182QzhWMEVBSXplVWUyYk8yemVOTlg5MW9iWlV2dmRVUC1kQlVDM0dwdFdvNWhhYnBKWUVaWmlabWdRSHAwNnlKS21lN3V2MmZyaXBMMURzUmVDUXlIZGRxQXh4VmVQdGQtaEc5aDZRbTF1OW12YjVzZlN2VVI2cVl6bkVsQkpjTnBPbzJ3ZmgyRQ==","email":"gms.caas@hpe.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLWFiNDY1MTk3LWU3ZTMtNDFmOS1hMzA1LTVjNDI0MzZmNDM2ZjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTJNVGM1WkRSbVl6WXpNekUwWVRrNU9HRmxaVGxtT1RVM1pHWTVaVEUxTXlKOS5aUnN6NExWdmQ5VkpicGp0NjBoaDdUeUVCbTN5R3RLWEpwQTR5QW03QzZMZl91TzhKMUtxeEV5YUF0UzdlVkdLVDhKUkpldjlhN3R0THhTWDZPSjJIWFlqYkVXMEVmTE1ib244ME1ZajJ5c1JyY2Q3SE5STWU4TE5Ra082OWNtdTFkbDlrLXFkb3B2blBZc29lckdvbDNlODZLM09zamNHLTNDRjVUeDJGN2pQMkh5cmJUcnNJUk1kVUctVzJBNEZkT2poOVZiVnBiWjNUM0p0ODh3ZVIxeUQyRGF6ellVZ3JJZlhCYktHWHd5WTVaSl81WjJWQ183aDlfWnVMRWlLdW1neEdYeDVsVzhDb09JSThiWnZMNVhBQ192VUxkMGQ1NDV3NWdWN3M4bG84THpQOGc4UUR3Y2JnQnI5OEFXbF9GNWtrN2VJNVJUNUFiS04tTEZNRGlZU0d1cHhIbmlnT0pQVzlreGhJV19GTVdJeW9STi0zak1FaHlQaVoxeFVYbVlvbWhKVGM0ZXdzZzdJblFtUlJ3anl1RmxVVFhDeEhKTTJ6R3RPbWxvc0xvUFpuLUN4eTR2Y3ExdUhYSWcwWW9JRlFBYl9tZ1B2bk1QODZ4Nkd2eXdyOHRfanJRX0xKVzluYTJMRkxJSlVHSVJXWEtVcmtXdDVLd1NQbVlZWXpZSVZNUmF0WV9EUkJQZjNQZGRqUlNPRHdBcHpnRnU3T182QzhWMEVBSXplVWUyYk8yemVOTlg5MW9iWlV2dmRVUC1kQlVDM0dwdFdvNWhhYnBKWUVaWmlabWdRSHAwNnlKS21lN3V2MmZyaXBMMURzUmVDUXlIZGRxQXh4VmVQdGQtaEc5aDZRbTF1OW12YjVzZlN2VVI2cVl6bkVsQkpjTnBPbzJ3ZmgyRQ==","email":"gms.caas@hpe.com"}}}'
+
+openshift_rhcos_template_name: "rhcos_template"
+
+## OpenShift network variables (for customization)
+
+openshift_networking:
+  pod_cidr: "10.128.0.0/14"
+  host_prefix: "23"
+  type: "OpenShiftSDN"
+  service_cidr: "172.30.0.0/16"
+
+# OpenShift nodes list
+bootstrap_nodes_list:
+  - "ocpbootstrap"
+
+master_nodes_list:
+  - "ocpmaster1"
+  - "ocpmaster2"
+  - "ocpmaster3"
+
+# worker_nodes_list:
+#   - "ocpworker1"
+#   - "ocpworker2"
+#   - "ocpworker3"
+
+# vCenter variables
+openshift_vcenter:
+  host: "10.31.4.5"
+  username: "Administrator@vsphere.local"
+  password: "Password@123"
+  datacenter: "OCP VCC zenseact Test"
+  cluster: "VCC Zenseact - Test"
+  default_datastore: "datastore1"
+  folder: "OCP-Deployment"
+
+# Proxy variables (if it is used)
+openshift_proxy:
+  http: "http://10.154.248.91:8080"
+  https: "http://10.154.248.91:8080"
+  no_proxy: "localhost,.{{openshift_base_domain}}"
+
